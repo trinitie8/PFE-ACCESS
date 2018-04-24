@@ -17,26 +17,48 @@ function afficherMenu(){
 	
 	<div id="menu">
 			<ul id="onglets">
-				<li class="active"><a href="Doctorant.php"> Accueil </a></li>
-				<li ><a href="acceuil.php"> Forums </a></li>
-				<li><a href="#paragraphe2"> Livre dor </a></li>
-				<li><a href="#paragraphe3"> Léquipe </a></li>
-				<li><a href="Inscription.html"> Sinscrire </a></li>
-				<li><a href="Connexion.html"> Se connecter </a></li>
+				<li id="active"><a href="#accueil"> Accueil </a></li>
+				<li><a href="#doctorant"> Menu des Doctorant </a></li>
+				<li><a href="#etat"> Menu états </a></li>
+				<li><a href="#stat"> Statistiques </a></li>
+				<li><a href="#1"> Sinscrire </a></li>
+				<li><a href="#2"> Se connecter </a></li>
 			</ul>
 	</div>
 			
-	<div id="container1">
-			<div id="paragraphe2">
+	<div id="container">
+			<div id="accueil">
+				Bien le bonjour !
+			</div>
+	
+			<div id="doctorant">
+				<label for="nomDoctorant" id="nomD">Nom du Doctorant</label>
+				<input type="text" id="nomDoctorant" name="nomDoc" value=""  size="20" maxlength="20" />
+				
+				<label for="prenomDoctorant" id="prenomD">Prénom du Doctorant</label>
+				<input type="text" id="prenomDoctorant" name="prenomDoc" value=""  size="20" maxlength="20" />  
+				
+				<label for="sexeDoctorant" id="sexeD">Sexe</label>
+				<input type="text" id="sexeDoctorant" name="sexeDoc" value=""  size="5" maxlength="3" />
+				<br/><br/>
+				
+				<label for="nomDepouse" id="nomDep">Nom d\'épouse</label>
+				<input type="text" id="nomDepouse" name="nomDepouse" value=""  size="20" maxlength="20" />  
+				
+				<label for="dateNaissance" id="dateN">Date de naissance</label>
+				<input type="text" id="dateNaissance" name="dateNaiss" value=""  size="20" maxlength="20" />  
+				
+				
+			</div>
+			
+			<div id="etat">
 				<br/>
 				<label for="login" id="log">Nom d\'utilisateur</label>
 				<input type="text" id="login" name="login" value=""  size="20" maxlength="20" />
 				<br />
-				Cotnenu de la page 2 bla 
-				bla <br/> bli <br/> <br/> bleu <br/>
 			</div>
  
-			<div id="paragraphe3">
+			<div id="stat">
 				<input type="radio" id="contactChoice1" name="contact" value="email">
 				<label for="contactChoice1">Email</label>
 		
@@ -45,13 +67,12 @@ function afficherMenu(){
 
 				<input type="radio" id="contactChoice3" name="contact" value="courrier">
 				<label for="contactChoice3">Courrier</label>
-				PARAGRAPHE 3 <br/> rouge <br/> blouge <br/> <br/> heuuuu <br/> essai <br/> <br/> bref.... <br/> ciao <br/> bon appetit <br/>
 			</div>
 			
 		</div>';
 	}
 
-function afficherDivers(){
+/*function afficherDivers(){
 	echo '<meta charset="UTF-8">
 	<head>
 		<link href="Contenu/style.css" type="text/css" rel="stylesheet" />
@@ -77,7 +98,7 @@ PARAGRAPHE 3
 </div>
 
 </div>';
-	}
+	}*/
 
 function afficherMessage($var){
 	echo $var;

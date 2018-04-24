@@ -1,7 +1,11 @@
 
 label
 {
-	color: #FF0000;
+	/*color: #FF0000;*/
+	margin-left : 50px;
+	/*display:block;*/
+	/*width:200px;*/
+	/*float:left;*/
 }
 
 
@@ -49,58 +53,43 @@ label
 
 /*-----------------------------------------------------------------------------------------*/
 
-
-
+ 
 .container {
  width: 700px; height: 700px; /* On donne une largeur/hauteur fixe à notre container*/
  overflow: hidden ;/* On cache tout ce qui dépasserait de container*/
 }
- 
-#paragraphe-1 {
- position: absolute;
- top: -100; left: 0; /* p1 est à 100% au dessus de container = il est invisible*/
-}
-#paragraphe-2 {
- position: absolute;
- top: -100; left: 0; 
-}
-#paragraphe-3 {
- position: absolute;
- top: -100; left: 0; 
-}
 
-.container1 {
- width: 700px; height: 700px; /* On donne une largeur/hauteur fixe à notre container*/
- overflow: hidden ;/* On cache tout ce qui dépasserait de container*/
-}
-#paragraphe2 {
+#accueil{
  position: absolute;
  top: -300; left: 0; 
 }
-#paragraphe3 {
+#doctorant {
+ position: absolute;
+ top: -300; left: 0; 
+}
+#etat {
+ position: absolute;
+ top: -300; left: 0; 
+}
+#stat {
  position: absolute;
  top: -300; left: 0; 
 } 
- 
- /* Quand p1 est demandé, alors...*/
-#paragraphe-1:target { 
- position: absolute;
- top: 0; left: 0; /* il revient à 0 pour être visible par l'utilisateur*/
-}
-#paragraphe-2:target {
- position: absolute;
- top: 0; left: 0; 
-}
-#paragraphe-3:target {
- position: absolute;
- top: 0; left: 0; 
-}
 
-#paragraphe2:target {
+
+#accueil:target{
  position: absolute;
  top: 100; left: 100; 
 }
-#paragraphe3:target {
+#doctorant:target {
+ position: absolute;
+ top: 100; left: 100; 
+}
+#etat:target {
+ position: absolute;
+ top: 100; left: 100; 
+}
+#stat:target {
  position: absolute;
  top: 100; left: 100; 
 }
