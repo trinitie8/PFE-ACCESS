@@ -1,4 +1,106 @@
+
 label
 {
 	color: #FF0000;
+}
+
+
+#onglets
+{
+    font : bold 11px Batang, arial, serif;
+    list-style-type : none;
+    padding-bottom : 36px; /* à modifier suivant la taille de la police ET de la hauteur de l'onglet dans #onglets li */
+    border-bottom : 1px solid #9EA0A1;
+    margin-left : 0;
+}
+
+
+#onglets li
+{
+    float : left;
+    height : 25px; /* à modifier suivant la taille de la police pour centrer le texte dans l'onglet */
+    background-color: #F4F9FD;
+    margin : 2px 2px 0 2px !important;  /* Pour les navigateurs autre que IE */
+    margin : 1px 2px 0 2px;  /* Pour IE  */
+    border : 1px solid #9EA0A1;
+}
+
+
+#onglets li.active
+{
+    border-bottom: 1px solid #fff;
+    background-color: #fff;
+}
+
+#onglets a
+{
+    display : block;
+    color : #666;
+    text-decoration : none;
+    padding : 4px;
+}
+
+
+#onglets a:hover
+{
+    background : #fff;
+}
+
+
+/*-----------------------------------------------------------------------------------------*/
+
+
+
+.container {
+ width: 700px; height: 700px; /* On donne une largeur/hauteur fixe à notre container*/
+ overflow: hidden ;/* On cache tout ce qui dépasserait de container*/
+}
+ 
+#paragraphe-1 {
+ position: absolute;
+ top: -100; left: 0; /* p1 est à 100% au dessus de container = il est invisible*/
+}
+#paragraphe-2 {
+ position: absolute;
+ top: -100; left: 0; 
+}
+#paragraphe-3 {
+ position: absolute;
+ top: -100; left: 0; 
+}
+
+.container1 {
+ width: 700px; height: 700px; /* On donne une largeur/hauteur fixe à notre container*/
+ overflow: hidden ;/* On cache tout ce qui dépasserait de container*/
+}
+#paragraphe2 {
+ position: absolute;
+ top: -300; left: 0; 
+}
+#paragraphe3 {
+ position: absolute;
+ top: -300; left: 0; 
+} 
+ 
+ /* Quand p1 est demandé, alors...*/
+#paragraphe-1:target { 
+ position: absolute;
+ top: 0; left: 0; /* il revient à 0 pour être visible par l'utilisateur*/
+}
+#paragraphe-2:target {
+ position: absolute;
+ top: 0; left: 0; 
+}
+#paragraphe-3:target {
+ position: absolute;
+ top: 0; left: 0; 
+}
+
+#paragraphe2:target {
+ position: absolute;
+ top: 100; left: 100; 
+}
+#paragraphe3:target {
+ position: absolute;
+ top: 100; left: 100; 
 }

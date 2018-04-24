@@ -1,23 +1,30 @@
 <?php
 
-function getConnect(){
-	require_once('connect.php');
-	$connexion = new PDO('mysql:host ='.SERVEUR.';dbname='.BDD,USER,PASSWORD);
-	$connexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-	$connexion->query('SET NAME UTF8');
-	return $connexion;
-	}
-
-function ajouterUser($login,$password,$grade){
-	$connxion = getConnect();
-	$requete = "insert into utilisateurs values ('$login','$password','$grade')";
-	$connexion->query($requete);
-	
+function ajouterUser($login,$password){
+	$connexion = connexion();
+	$result=mysql_query("insert into UTILISATEURS values ('$login','$password',0)");
+	deconnexion();	
 	}
 	
 function getUtilisateur($login){
-	$connexion=getConnect();
-	$requete="select * from utilisateurs where login='$login'";
-	$resultat=$connexion->query($requete);
+	$connexion=connexion();
+	$resultat=mysql_query("select * from UTILISATEURS where login='$login'");
+	deconnexion();
 	return $resultat;
+	}
+
+function connexion(){
+	$mysql_host = "dbhost:3306";
+	$mysql_user = "o2084311";
+	$mysql_pass = "o2084311";
+	$mysql_bdd = "bd_o2084311";
+	$connexion = mysql_connect($mysql_host, $mysql_user, $mysql_pass)
+		or die("Impossible de se connecter au serveur mysql ");
+	mysql_select_db("$mysql_bdd")
+		or die("Impossible de se connecter &#224; la base de donn&#233;es bd_o2084311");
+	return $connexion;
+	}
+
+function deconnexion(){
+	mysql_close();  
 	}

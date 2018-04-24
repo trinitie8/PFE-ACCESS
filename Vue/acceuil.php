@@ -2,14 +2,16 @@
 <meta charset="UTF-8">
 <html>
 	<head>
-	<link href="style.css" type="text/css" rel="stylesheet" />
+	<link href="Contenu/style.css" type="text/css" rel="stylesheet" />
 		<title>
 			Acceuil
 		</title>
 	
 	</head>
+	
+<?php //@CtlAfficherOnglet(); ?>
 
-<form method="post" action="connexion.php">
+<form method="post" action="Doctorant.php">
 <fieldset>
     <legend>Inscription</legend>
 	<br/>
@@ -22,12 +24,6 @@
     <input type="text" id="password" name="password" value="" size="20" maxlength="20" required/>
     <br />
     <br/>
-
-	<label for="grade">Choix du grade </label>
-    <input type="text" id="grade" name="grade" value="" size="20" maxlength="20" />
-    <br />
-    <br/>
-
 
     <input type="submit" value="Connexion" name="ajouter" />
     <br />
