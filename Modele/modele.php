@@ -7,7 +7,7 @@ function ajouterUser($login,$password){
 	}
 	
 function getUtilisateur($login){
-	$connexion=connexion();
+	connexion();
 	$resultat=mysql_query("select * from UTILISATEURS where login='$login'");
 	deconnexion();
 	return $resultat;
@@ -22,7 +22,6 @@ function connexion(){
 		or die("Impossible de se connecter au serveur mysql ");
 	mysql_select_db("$mysql_bdd")
 		or die("Impossible de se connecter &#224; la base de donn&#233;es bd_o2084311");
-	return $connexion;
 	}
 
 function deconnexion(){

@@ -40,15 +40,29 @@ function afficherMenu(){
 				
 				<label for="sexeDoctorant" id="sexeD">Sexe</label>
 				<input type="text" id="sexeDoctorant" name="sexeDoc" value=""  size="5" maxlength="3" />
-				<br/><br/>
+				<br/>
 				
 				<label for="nomDepouse" id="nomDep">Nom d\'épouse</label>
 				<input type="text" id="nomDepouse" name="nomDepouse" value=""  size="20" maxlength="20" />  
 				
 				<label for="dateNaissance" id="dateN">Date de naissance</label>
 				<input type="text" id="dateNaissance" name="dateNaiss" value=""  size="20" maxlength="20" />  
+				<br/>
 				
+				<label for="adresseDoctorant1" id="ad1D">Adresse 1</label>
+				<input type="text" id="adresseDoctorant1" name="adresseDoc1" value=""  size="50" maxlength="50" />
 				
+				<label for="nomParentDoc" id="nomPDoc">Nom des parents</label>
+				<input type="text" id="nomParentDoc" name="nomParDoc" value=""  size="20" maxlength="20" />
+				
+				<br/>
+				<label for="adresseDoctorant2" id="ad2D">Adresse 2</label>
+				<input type="text" id="adresseDoctorant2" name="adresseDoc2" value=""  size="50" maxlength="50" />
+				
+				<label for="adresseParent1" id="adP1">Adresse 1 parents</label>
+				<input type="text" id="adresseParent1" name="adPar1" value=""  size="20" maxlength="20" />
+				
+				<br/>
 			</div>
 			
 			<div id="etat">

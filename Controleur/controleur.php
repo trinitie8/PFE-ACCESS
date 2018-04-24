@@ -23,7 +23,5 @@ function CtlAfficherOnglet(){
 	afficherMenu();
 	}
 
-function CtlAfficherDivers(){
-	afficherDivers();
-	}
+
 

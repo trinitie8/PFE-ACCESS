@@ -7,7 +7,8 @@ try{
 		CtlAjouterUser($login,$password);
 		}
 	else{
-		CtlAccueil();
+		CtlAfficherOnglet();
+		//CtlAccueil();
 		}
 
 }catch (Exception $e ){

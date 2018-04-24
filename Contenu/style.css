@@ -1,13 +1,24 @@
 
 label
 {
+	position:absolute;
+	/*left:20px;*/
 	/*color: #FF0000;*/
+	padding-top:.5em;
 	margin-left : 50px;
-	/*display:block;*/
+	display:inline-block;
 	/*width:200px;*/
 	/*float:left;*/
 }
 
+/*label {
+ margin-top:10px;
+ display:block;
+ }
+label.inline {
+ display:inline-block;
+ margin-right:50px;
+ }*/
 
 #onglets
 {
@@ -59,7 +70,11 @@ label
  overflow: hidden ;/* On cache tout ce qui dépasserait de container*/
 }
 
-#accueil{
+#accueil.active{
+ position: absolute;
+ top: 100; left: 100; 
+}
+#accueil {
  position: absolute;
  top: -300; left: 0; 
 }
@@ -79,11 +94,11 @@ label
 
 #accueil:target{
  position: absolute;
- top: 100; left: 100; 
+ top: -300; left: 0; 
 }
 #doctorant:target {
  position: absolute;
- top: 100; left: 100; 
+ top: 100; left: 100;  
 }
 #etat:target {
  position: absolute;
