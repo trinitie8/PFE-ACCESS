@@ -4,88 +4,87 @@ function afficherAccueil(){
 	require_once('acceuil.php');
 	}
 	
+function setCharSetTo($charset){
+	echo'<meta charset="'.$charset.'">';
+}
+	
+function setCharSet(){
+	echo'<meta charset="UTF-8">';
+}
+	
 function afficherErreur($erreur){
 	$contenu='<p>'.$erreur.'</p> <p> Par mesure de sécurité vous avez été déconnecté. </p>';
 	require_once('acceuil.php');
 	}
 
 function afficherMenu(){
-	echo '<meta charset="UTF-8">
-	<head>
-		<link href="Contenu/style.css" type="text/css" rel="stylesheet" />
-	</head>
-	
-	<div id="menu">
-			<ul id="onglets">
-				<li id="active"><a href="#accueil"> Accueil </a></li>
-				<li><a href="#doctorant"> Menu des Doctorant </a></li>
-				<li><a href="#etat"> Menu états </a></li>
-				<li><a href="#stat"> Statistiques </a></li>
-				<li><a href="#1"> Sinscrire </a></li>
-				<li><a href="#2"> Se connecter </a></li>
-			</ul>
-	</div>
-			
-	<div id="container">
-			<div id="accueil">
-				Bien le bonjour !
-			</div>
-	
-			<div id="doctorant">
-				<label for="nomDoctorant" id="nomD">Nom du Doctorant</label>
-				<input type="text" id="nomDoctorant" name="nomDoc" value=""  size="20" maxlength="20" />
-				
-				<label for="prenomDoctorant" id="prenomD">Prénom du Doctorant</label>
-				<input type="text" id="prenomDoctorant" name="prenomDoc" value=""  size="20" maxlength="20" />  
-				
-				<label for="sexeDoctorant" id="sexeD">Sexe</label>
-				<input type="text" id="sexeDoctorant" name="sexeDoc" value=""  size="5" maxlength="3" />
-				<br/>
-				
-				<label for="nomDepouse" id="nomDep">Nom d\'épouse</label>
-				<input type="text" id="nomDepouse" name="nomDepouse" value=""  size="20" maxlength="20" />  
-				
-				<label for="dateNaissance" id="dateN">Date de naissance</label>
-				<input type="text" id="dateNaissance" name="dateNaiss" value=""  size="20" maxlength="20" />  
-				<br/>
-				
-				<label for="adresseDoctorant1" id="ad1D">Adresse 1</label>
-				<input type="text" id="adresseDoctorant1" name="adresseDoc1" value=""  size="50" maxlength="50" />
-				
-				<label for="nomParentDoc" id="nomPDoc">Nom des parents</label>
-				<input type="text" id="nomParentDoc" name="nomParDoc" value=""  size="20" maxlength="20" />
-				
-				<br/>
-				<label for="adresseDoctorant2" id="ad2D">Adresse 2</label>
-				<input type="text" id="adresseDoctorant2" name="adresseDoc2" value=""  size="50" maxlength="50" />
-				
-				<label for="adresseParent1" id="adP1">Adresse 1 parents</label>
-				<input type="text" id="adresseParent1" name="adPar1" value=""  size="20" maxlength="20" />
-				
-				<br/>
-			</div>
-			
-			<div id="etat">
-				<br/>
-				<label for="login" id="log">Nom d\'utilisateur</label>
-				<input type="text" id="login" name="login" value=""  size="20" maxlength="20" />
-				<br />
-			</div>
- 
-			<div id="stat">
-				<input type="radio" id="contactChoice1" name="contact" value="email">
-				<label for="contactChoice1">Email</label>
-		
-				<input type="radio" id="contactChoice2" name="contact" value="telephone">
-				<label for="contactChoice2">Téléphone</label>
-
-				<input type="radio" id="contactChoice3" name="contact" value="courrier">
-				<label for="contactChoice3">Courrier</label>
-			</div>
-			
-		</div>';
+	echo '	
+	<form id="monForm" method="post" action="Doctorant.php">
+	<input type="submit" value="Gestion/Recherche de doctorants" name="go_To_Gestion_Doctorants" />
+	<input type="submit" value="Gestion des informations saisissables" name="go_To_Gestion_Saisies" />
+	</form>'
+	;
 	}
+	
+function afficherGestionDoctorant(){
+	
+}
 
+function afficherGestionSaisies(){
+
+}
+
+function afficherInscription(){
+	echo'
+			
+	<form method="post" action="Doctorant.php">
+	<fieldset>
+		<legend>Inscription</legend>
+		<br/>
+		<label for="login" id="log">Nom d\'utilisateur</label>
+		<input type="text" id="login" name="login" value=""  size="20" maxlength="20" />
+		<br />
+		<br/>
+
+		<label for="password">Mot de passe </label>
+		<input type="text" id="password" name="password" value="" size="20" maxlength="20" required/>
+		<br />
+		<br/>
+
+		<label for="grade">Grade </label>
+		<input type="text" id="grade" name="grade" value="" size="20" maxlength="20" required/>
+		<br />
+		<br/>
+		
+		<input type="submit" value="S\'inscrire" name="inscription" />
+		
+		<br />
+		<br/>
+		
+		<?php echo $contenu; ?>
+		
+	</fieldset>
+	</form>
+	<form method="post" action="Doctorant.php">
+		<input type="submit" value="Retour" name="go_To_Accueil" />
+	</form>
+	';
+}
+
+function afficherDeconnexion(){
+	echo '
+	<form id="monForm" method="post" action="Doctorant.php">
+	<input type="submit" value="Deconnexion" name="deconnexion" />
+	</form>';
+
+}
+
+function afficherBoutonMenu(){
+	echo '
+	<form id="monForm" method="post" action="Doctorant.php">
+	<input type="submit" value="Retour au menu" name="go_To_Menu" />
+	</form>';
+}
 /*function afficherDivers(){
 	echo '<meta charset="UTF-8">
 	<head>
@@ -115,5 +114,5 @@ PARAGRAPHE 3
 	}*/
 
 function afficherMessage($var){
-	echo $var;
+	echo '<p>'.$var.'</p>';
 	}

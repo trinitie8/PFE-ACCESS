@@ -1,29 +1,44 @@
 <?php
 
-function ajouterUser($login,$password){
-	$connexion = connexion();
-	$result=mysql_query("insert into UTILISATEURS values ('$login','$password',0)");
-	deconnexion();	
+function ajouterUser($login,$password,$grade){
+	connexionBDD();
+	$result=mysql_query("insert into UTILISATEURS values ('$login','$password',$grade)");
+	deconnexionBDD();	
+	return $result;
 	}
 	
-function getUtilisateur($login){
-	connexion();
-	$resultat=mysql_query("select * from UTILISATEURS where login='$login'");
-	deconnexion();
-	return $resultat;
+function isExistingUser($login){
+	connexionBDD();
+	if($resultat=mysql_fetch_object(mysql_query("select * from UTILISATEURS where login='$login'"))) $rep=true;
+	else $rep=false;
+	deconnexionBDD();
+	return $rep;
 	}
+	
+function checkUser($login,$mdp){
+	connexionBDD();
+	if($resultat=mysql_fetch_object(mysql_query("SELECT * FROM UTILISATEURS WHERE LOGIN='$login' AND PASSWORD='$mdp'"))){
+		if($login==$resultat->login && $mdp==$resultat->password) return true;
+	}
+	deconnexionBDD();
+	return false;
+}
 
-function connexion(){
+function connexionBDD(){
 	$mysql_host = "dbhost:3306";
 	$mysql_user = "o2084311";
 	$mysql_pass = "o2084311";
 	$mysql_bdd = "bd_o2084311";
-	$connexion = mysql_connect($mysql_host, $mysql_user, $mysql_pass)
+	mysql_connect($mysql_host, $mysql_user, $mysql_pass)
 		or die("Impossible de se connecter au serveur mysql ");
 	mysql_select_db("$mysql_bdd")
-		or die("Impossible de se connecter &#224; la base de donn&#233;es bd_o2084311");
+		or die("Impossible de se connecter à la base de données bd_o2084311");
+	mysql_query("SET NAMES 'utf8'");
+	mysql_query("SET CHARACTER SET utf8");
+	mysql_query("SET COLLATION_CONNECTION = 'utf8_unicode_ci'");
 	}
 
-function deconnexion(){
+function deconnexionBDD(){
 	mysql_close();  
 	}
+	
