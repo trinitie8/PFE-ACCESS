@@ -1,24 +1,96 @@
-
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------STYLE POUR LES LABELS, INPUTS...----------------------------*/
+/*-----------------------------------------------------------------------------------------*/
 label
 {
-	position:absolute;
-	/*left:20px;*/
-	/*color: #FF0000;*/
-	padding-top:.5em;
-	margin-left : 50px;
-	display:inline-block;
-	/*width:200px;*/
-	/*float:left;*/
+	position:relative;
+	/*text-align:right;*/
+	
 }
 
-/*label {
- margin-top:10px;
- display:block;
- }
-label.inline {
- display:inline-block;
- margin-right:50px;
- }*/
+input 
+{
+	position:relative;
+	margin-left:10px;
+	margin-top:0.5em;
+	
+}
+
+select
+{
+	margin-top:0.5em;
+}
+
+textarea
+{
+	margin-top:0.5em;
+}
+
+#sectionGauche
+{
+	margin-left:0;
+	float:left;
+	width:500px;
+}
+
+#sectionDroite
+{
+	float:right;
+	/*position:relative;*/
+	margin-left: 20px;
+}
+
+
+checkbox, radio
+{
+	cursor: pointer;
+}
+
+#nomDepouse, #nomED
+{
+	visibility:hidden;
+}
+
+textarea
+{
+	resize:none;
+}
+
+#cadre
+{
+	border: 2px solid black;
+	margin-top:0.5em;
+	padding-bottom:0.5em;
+	padding-left:0.2em;
+}
+
+#bas
+{
+	border-top:2px solid black;
+	float:inline-end;
+	margin-top:0.5em;
+	margin-left:0;
+}
+
+/*hr
+{
+	position:absolute;
+}*/
+
+select
+{
+	width:200px;
+}
+
+#sujetThese, #cotutelle, #financement
+{
+	font-size:20px;
+	font-weight:bold;
+}
+
+/*-----------------------------------------------------------------------------------------*/
+/*--------------------------------------ONGLETS--------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
 
 #onglets
 {
@@ -54,7 +126,7 @@ label.inline {
     text-decoration : none;
     padding : 4px;
 }
-
+0
 
 #onglets a:hover
 {
@@ -63,6 +135,8 @@ label.inline {
 
 
 /*-----------------------------------------------------------------------------------------*/
+/*---------------------------------------CACHER LES ONGLETS--------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
 
  
 .container {
@@ -70,41 +144,53 @@ label.inline {
  overflow: hidden ;/* On cache tout ce qui dépasserait de container*/
 }
 
-#accueil.active{
+#these {
  position: absolute;
- top: 100; left: 100; 
-}
-#accueil {
- position: absolute;
- top: -300; left: 0; 
+ top: -700; left: -700; 
 }
 #doctorant {
  position: absolute;
- top: -300; left: 0; 
+ top: -700; left: -700; 
 }
-#etat {
+#prethese {
  position: absolute;
- top: -300; left: 0; 
+ top: -700; left: 0; 
 }
-#stat {
+#1A {
  position: absolute;
- top: -300; left: 0; 
+ top: -700; left: 0; 
+} 
+#2A {
+ position: absolute;
+ top: -700; left: 0; 
+}
+#3A {
+ position: absolute;
+ top: -700; left: 0; 
 } 
 
 
-#accueil:target{
+#these:target{
  position: absolute;
- top: -300; left: 0; 
+ top: 100; left: 100; 
 }
 #doctorant:target {
  position: absolute;
  top: 100; left: 100;  
 }
-#etat:target {
+#prethese:target {
  position: absolute;
  top: 100; left: 100; 
 }
-#stat:target {
+#1A:target {
+ position: absolute;
+ top: 100; left: 100; 
+}
+#2A:target {
+ position: absolute;
+ top: 100; left: 100; 
+}
+#3A:target {
  position: absolute;
  top: 100; left: 100; 
 }
