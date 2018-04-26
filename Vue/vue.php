@@ -18,12 +18,51 @@ function afficherErreur($erreur){
 	}
 
 function afficherMenu(){
-	echo '	
-	<form id="monForm" method="post" action="Doctorant.php">
-	<input type="submit" value="Gestion/Recherche de doctorants" name="go_To_Gestion_Doctorants" />
-	<input type="submit" value="Gestion des informations saisissables" name="go_To_Gestion_Saisies" />
-	</form>'
-	;
+	echo '	<head>
+		<link href="Contenu/style.css" type="text/css" rel="stylesheet" />
+		</head>
+		
+	<div id="menu">
+			<ul id="onglets">
+				<li><a href="#doctorant"> Gestion des doctorants </a></li>
+				<li><a href="#saisie"> Gestion de la base </a></li>
+				<li><a href="#stat"> Statistiques </a></li>
+			</ul>
+	</div>
+	
+			
+	<div id="container">
+	
+			<div id="doctorant">
+		
+			<form id="monForm" method="post" action="Doctorant.php">
+			<input type="submit" value="Gestion/Recherche de doctorants" name="go_To_Gestion_Doctorants" />
+			</form>
+			</div>
+						
+			<div id="saisie">
+			<form id="monForm" method="post" action="Doctorant.php">
+			<input type="submit" value="Gestion des informations saisissables" name="go_To_Gestion_Saisies" />
+			
+			</form>
+			</div>
+ 
+ 
+ 
+ 
+			<div id="stat">
+				<input type="radio" id="contactChoice1" name="contact" value="email">
+				<label for="contactChoice1">Email</label>
+		
+				<input type="radio" id="contactChoice2" name="contact" value="telephone">
+				<label for="contactChoice2">Téléphone</label>
+
+				<input type="radio" id="contactChoice3" name="contact" value="courrier">
+				<label for="contactChoice3">Courrier</label>
+				
+			</div>
+			
+	</div>';
 	}
 
 
@@ -71,10 +110,11 @@ function afficherInscription(){
 function afficherDeconnexion(){
 	echo '
 	<form id="monForm" method="post" action="Doctorant.php">
-	<input type="submit" value="Deconnexion" name="deconnexion" />
+	<input type="submit" value="Déconnexion" name="deconnexion" />
 	</form>';
 
 }
+
 
 function afficherMenuGestionDoctorant(){
 	echo '<head>
@@ -225,7 +265,19 @@ function afficherMenuGestionDoctorant(){
 				
 				</form>
 				
+
 			</div>
+
+				<br/>	
+<!--- TODO avec la base de donnée-->
+				<label for="paysOrigine" id="paysOD">Pays d\'origine</label>
+				<select id="paysOrigine">';
+				while($resultat=mysql_fetch_object($informations["lesPays"])){
+					echo '<option value="'.$resultat->CODE_PAYS.'">'.$resultat->NOM_PAYS.'</option>';
+				}
+				echo
+				'</select>
+
 				
 			
 			<div id="these">
@@ -416,7 +468,13 @@ function afficherMenuGestionDoctorant(){
 			<div id="1A">
 				<form method="POST">
 				
+
 				</form>
+
+				<br/>
+				<label for="commentaireDoctorant" id="comD">Commentaire</label>
+				<TEXTAREA id="commentaireDoctorant" name="commentaire" placeholder="Commentaire" rows=4 cols=40></TEXTAREA>
+
 
 			</div>
 			

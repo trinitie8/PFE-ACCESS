@@ -51,6 +51,7 @@ checkbox, radio
 	visibility:hidden;
 }
 
+<<<<<<< HEAD
 textarea
 {
 	resize:none;
@@ -87,6 +88,35 @@ select
 	font-size:20px;
 	font-weight:bold;
 }
+=======
+
+/* essai affichage nom epouse quand sexe feminin coche
+.sexeF::after
+{
+	display:none;
+	/*visibility:visible;
+}
+
+input:checked + .sexeF::after
+{
+	display:block;
+	/*visibility:visible;
+}
+
+.effacer
+{
+	display:none;
+	/*visibility:hidden;
+}
+
+#sexeF:checked ~ .effacer
+{
+	display:block;
+	/*visibility:visible;
+}
+*/
+
+>>>>>>> 4f6c41c0726f08fed9ba601001e1793139f5094b
 
 /*-----------------------------------------------------------------------------------------*/
 /*--------------------------------------ONGLETS--------------------------------------------*/
@@ -144,6 +174,7 @@ select
  overflow: hidden ;/* On cache tout ce qui dépasserait de container*/
 }
 
+<<<<<<< HEAD
 #these {
  position: absolute;
  top: -700; left: -700; 
@@ -151,10 +182,23 @@ select
 #doctorant {
  position: absolute;
  top: -700; left: -700; 
+=======
+/*#accueil.active{
+ position: absolute;
+ top: 100; left: 100; 
+}*/
+#accueil {
+ position: absolute;
+ top: -700; left: 0; 
+>>>>>>> 4f6c41c0726f08fed9ba601001e1793139f5094b
 }
 #prethese {
  position: absolute;
+<<<<<<< HEAD
  top: -700; left: 0; 
+=======
+ top: -700; left: -700; 
+>>>>>>> 4f6c41c0726f08fed9ba601001e1793139f5094b
 }
 #1A {
  position: absolute;
@@ -163,8 +207,17 @@ select
 #2A {
  position: absolute;
  top: -700; left: 0; 
+<<<<<<< HEAD
 }
 #3A {
+=======
+} 
+#saisie {
+ position: absolute;
+ top: -700; left: 0; 
+} 
+#stat {
+>>>>>>> 4f6c41c0726f08fed9ba601001e1793139f5094b
  position: absolute;
  top: -700; left: 0; 
 } 
@@ -190,7 +243,15 @@ select
  position: absolute;
  top: 100; left: 100; 
 }
+<<<<<<< HEAD
 #3A:target {
+=======
+#saisie:target {
+ position: absolute;
+ top: 100; left: 100; 
+}
+#stat:target {
+>>>>>>> 4f6c41c0726f08fed9ba601001e1793139f5094b
  position: absolute;
  top: 100; left: 100; 
 }

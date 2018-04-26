@@ -62,10 +62,17 @@ function CtlMenu(){
 	}
 
 function CtlGestionDoctorant(){
+	if($lesPays=getTable("PAYS")){
+	$informations=array("lesPays"=>$lesPays);
+	
 	setCharSet();
-	afficherMenuGestionDoctorant();
+	afficherMenuGestionDoctorant($informations);
 	afficherBoutonMenu();
 	afficherDeconnexion();
+	}
+	else{
+		afficherErreur("Erreur lors de la récupération de la liste des pays.");
+	}
 }
 
 
