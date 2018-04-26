@@ -63,7 +63,7 @@ function CtlMenu(){
 
 function CtlGestionDoctorant(){
 	setCharSet();
-	afficherGestionDoctorant();
+	afficherMenuGestionDoctorant();
 	afficherBoutonMenu();
 	afficherDeconnexion();
 }
