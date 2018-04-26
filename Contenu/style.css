@@ -1,24 +1,87 @@
-
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------STYLE POUR LES LABELS, INPUTS...----------------------------*/
+/*-----------------------------------------------------------------------------------------*/
 label
 {
-	position:absolute;
-	/*left:20px;*/
-	/*color: #FF0000;*/
-	padding-top:.5em;
-	margin-left : 50px;
-	display:inline-block;
-	/*width:200px;*/
-	/*float:left;*/
+	position:relative;
+	/*text-align:right;*/
+	
 }
 
-/*label {
- margin-top:10px;
- display:block;
- }
-label.inline {
- display:inline-block;
- margin-right:50px;
- }*/
+input 
+{
+	position:relative;
+	margin-left:10px;
+	margin-top:0.5em;
+	
+}
+
+select
+{
+	margin-top:0.5em;
+}
+
+textarea
+{
+	margin-top:0.5em;
+}
+
+#sectionGauche
+{
+	margin-left:0;
+	float:left;
+	width:500px;
+}
+
+#sectionDroite
+{
+	float:right;
+	/*position:relative;*/
+	margin-left: 20px;
+}
+
+
+checkbox, radio
+{
+	cursor: pointer;
+}
+
+#nomDepouse, #nomED
+{
+	visibility:hidden;
+}
+
+
+/* essai affichage nom epouse quand sexe feminin coche
+.sexeF::after
+{
+	display:none;
+	/*visibility:visible;
+}
+
+input:checked + .sexeF::after
+{
+	display:block;
+	/*visibility:visible;
+}
+
+.effacer
+{
+	display:none;
+	/*visibility:hidden;
+}
+
+#sexeF:checked ~ .effacer
+{
+	display:block;
+	/*visibility:visible;
+}
+*/
+
+
+/*-----------------------------------------------------------------------------------------*/
+/*--------------------------------------ONGLETS--------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
 
 #onglets
 {
@@ -63,6 +126,8 @@ label.inline {
 
 
 /*-----------------------------------------------------------------------------------------*/
+/*---------------------------------------CACHER LES ONGLETS--------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
 
  
 .container {
@@ -70,37 +135,45 @@ label.inline {
  overflow: hidden ;/* On cache tout ce qui dépasserait de container*/
 }
 
-#accueil.active{
+/*#accueil.active{
  position: absolute;
  top: 100; left: 100; 
-}
+}*/
 #accueil {
  position: absolute;
- top: -300; left: 0; 
+ top: -700; left: 0; 
 }
 #doctorant {
  position: absolute;
- top: -300; left: 0; 
+ top: -700; left: -700; 
 }
 #etat {
  position: absolute;
- top: -300; left: 0; 
-}
+ top: -700; left: 0; 
+} 
+#saisie {
+ position: absolute;
+ top: -700; left: 0; 
+} 
 #stat {
  position: absolute;
- top: -300; left: 0; 
+ top: -700; left: 0; 
 } 
 
 
 #accueil:target{
  position: absolute;
- top: -300; left: 0; 
+ top: 100; left: 100; 
 }
 #doctorant:target {
  position: absolute;
  top: 100; left: 100;  
 }
 #etat:target {
+ position: absolute;
+ top: 100; left: 100; 
+}
+#saisie:target {
  position: absolute;
  top: 100; left: 100; 
 }

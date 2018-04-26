@@ -5,11 +5,11 @@ function afficherAccueil(){
 	}
 	
 function setCharSetTo($charset){
-	echo'<meta charset="'.$charset.'">';
+	echo'<meta charset="'.$charset.'"/>';
 }
 	
 function setCharSet(){
-	echo'<meta charset="UTF-8">';
+	echo'<meta charset="UTF-8"/>';
 }
 	
 function afficherErreur($erreur){
@@ -18,12 +18,51 @@ function afficherErreur($erreur){
 	}
 
 function afficherMenu(){
-	echo '	
-	<form id="monForm" method="post" action="Doctorant.php">
-	<input type="submit" value="Gestion/Recherche de doctorants" name="go_To_Gestion_Doctorants" />
-	<input type="submit" value="Gestion des informations saisissables" name="go_To_Gestion_Saisies" />
-	</form>'
-	;
+	echo '	<head>
+		<link href="Contenu/style.css" type="text/css" rel="stylesheet" />
+		</head>
+		
+	<div id="menu">
+			<ul id="onglets">
+				<li><a href="#doctorant"> Gestion des doctorants </a></li>
+				<li><a href="#saisie"> Gestion de la base </a></li>
+				<li><a href="#stat"> Statistiques </a></li>
+			</ul>
+	</div>
+	
+			
+	<div id="container">
+	
+			<div id="doctorant">
+		
+			<form id="monForm" method="post" action="Doctorant.php">
+			<input type="submit" value="Gestion/Recherche de doctorants" name="go_To_Gestion_Doctorants" />
+			</form>
+			</div>
+						
+			<div id="saisie">
+			<form id="monForm" method="post" action="Doctorant.php">
+			<input type="submit" value="Gestion des informations saisissables" name="go_To_Gestion_Saisies" />
+			
+			</form>
+			</div>
+ 
+ 
+ 
+ 
+			<div id="stat">
+				<input type="radio" id="contactChoice1" name="contact" value="email">
+				<label for="contactChoice1">Email</label>
+		
+				<input type="radio" id="contactChoice2" name="contact" value="telephone">
+				<label for="contactChoice2">Téléphone</label>
+
+				<input type="radio" id="contactChoice3" name="contact" value="courrier">
+				<label for="contactChoice3">Courrier</label>
+				
+			</div>
+			
+	</div>';
 	}
 
 
@@ -44,7 +83,7 @@ function afficherInscription(){
 		<br/>
 
 		<label for="password">Mot de passe </label>
-		<input type="text" id="password" name="password" value="" size="20" maxlength="20" required/>
+		<input type="password" id="password" name="password" value="" size="20" maxlength="20" required/>
 		<br />
 		<br/>
 
@@ -71,13 +110,13 @@ function afficherInscription(){
 function afficherDeconnexion(){
 	echo '
 	<form id="monForm" method="post" action="Doctorant.php">
-	<input type="submit" value="Deconnexion" name="deconnexion" />
+	<input type="submit" value="Déconnexion" name="deconnexion" />
 	</form>';
 
 }
 
-function AfficherMenuGestionDoctorant(){
-	echo '<meta charset="UTF-8">
+function afficherMenuGestionDoctorant($informations){
+	echo '
 	<head>
 		<link href="Contenu/style.css" type="text/css" rel="stylesheet" />
 		
@@ -190,11 +229,12 @@ function AfficherMenuGestionDoctorant(){
 				<br/>	
 <!--- TODO avec la base de donnée-->
 				<label for="paysOrigine" id="paysOD">Pays d\'origine</label>
-				<select id="paysOrigine">
-					<option value="France" selected>France</option> 
-					<option value="Angl" >Angleterre</option>
-					<option value="All">Allemagne</option>
-				</select>
+				<select id="paysOrigine">';
+				while($resultat=mysql_fetch_object($informations["lesPays"])){
+					echo '<option value="'.$resultat->CODE_PAYS.'">'.$resultat->NOM_PAYS.'</option>';
+				}
+				echo
+				'</select>
 				
 				<br/>				
 				<label for="nomParentDoc" id="nomP">Nom des parents</label>
@@ -218,7 +258,7 @@ function AfficherMenuGestionDoctorant(){
 				
 				<br/>
 				<label for="commentaireDoctorant" id="comD">Commentaire</label>
-				<TEXTAREA id="commentaireDoctorant" name="commentaire" rows=4 cols=40>Commentaires</TEXTAREA>
+				<TEXTAREA id="commentaireDoctorant" name="commentaire" placeholder="Commentaire" rows=4 cols=40></TEXTAREA>
 
 				<br/>
 				<label for="abandon" id="abandonD">Abandon de thèse </label>

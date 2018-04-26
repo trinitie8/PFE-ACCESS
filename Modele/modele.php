@@ -24,6 +24,28 @@ function checkUser($login,$mdp){
 	return false;
 }
 
+function getListePays(){
+	connexionBDD();
+	$resultat=mysql_query("SELECT * FROM PAYS");
+	deconnexionBDD();
+	return $resultat;
+}
+
+function getTable($table){
+	connexionBDD();
+	$resultat=mysql_query("SELECT * FROM ".$table);
+	deconnexionBDD();
+	return $resultat;
+}
+
+function getColumn($table,$column){
+	connexionBDD();
+	$resultat=mysql_query("SELECT ".$column." FROM ".$table);
+	deconnexionBDD();
+	return $resultat;
+}
+
+
 function connexionBDD(){
 	$mysql_host = "dbhost:3306";
 	$mysql_user = "o2084311";
