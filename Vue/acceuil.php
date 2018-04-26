@@ -9,11 +9,10 @@
 	
 	</head>
 	
-<?php //@CtlAfficherOnglet(); ?>
 
 <form method="post" action="Doctorant.php">
 <fieldset>
-    <legend>Inscription</legend>
+    <legend>Accueil</legend>
 	<br/>
     <label for="login" id="log">Nom d'utilisateur</label>
     <input type="text" id="login" name="login" value=""  size="20" maxlength="20" />
@@ -25,15 +24,20 @@
     <br />
     <br/>
 
-    <input type="submit" value="Connexion" name="ajouter" />
+    <input type="submit" value="Connexion" name="connexion" />
+    
     <br />
 	<br/>
 	
 	<?php echo $contenu; ?>
 	
 </fieldset>
-<br/>
-<!---<a href="Formulaire.html" >Creation de compte</a>-->
+</form>
+<form method="post" action="Doctorant.php">
+    <input type="submit" value="Inscription" name="go_To_Inscription" />
+    <input type="submit" value="Bypass" name="bypass" />
+</form>
+<br/> 
 
 
 </html>
