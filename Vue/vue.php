@@ -110,13 +110,13 @@ function afficherInscription(){
 function afficherDeconnexion(){
 	echo '
 	<form id="monForm" method="post" action="Doctorant.php">
-	<input type="submit" value="Déconnexion" name="deconnexion" />
+	<input type="submit" value="Déconnexion" name="deconnexion" id="boutonDeconnexion"/>
 	</form>';
 
 }
 
 
-function afficherMenuGestionDoctorant(){
+function afficherMenuGestionDoctorant($informations){
 	echo '<head>
 		<link href="Contenu/style.css" type="text/css" rel="stylesheet" />
 		
@@ -140,9 +140,7 @@ function afficherMenuGestionDoctorant(){
 				<li><a href="#doctorant" active> Etat civil du Doctorant </a></li>
 				<li><a href="#these"> Information thèse </a></li>
 				<li><a href="#prethese"> Pre-thèse </a></li>
-				<li><a href="#1A"> Cours ED 1A </a></li>
-				<li><a href="#2A"> Cours ED 2A </a></li>
-				<li><a href="#3A"> Cours ED 3A </a></li>
+				<li><a href="#cours"> Cours </a></li>
 				<li><a href="#soutenance"> Soutenance </a></li>
 				<li><a href="#postthese"> Post thèse </a></li>
 				<li><a href="#these+2"> Thèse +2 </a></li>
@@ -173,11 +171,11 @@ function afficherMenuGestionDoctorant(){
 					<br/>
 					
 					<label for="adresseDoctorant1" id="adD1">Adresse 1</label>
-					<input type="text" id="adresseDoctorant1" name="adresseDoc1" value=""  size="50" maxlength="50" />
+					<input type="text" id="adresseDoctorant1" name="adresseDoc1" value=""  size="20" maxlength="50" />
 					<br/>
 					
 					<label for="adresseDoctorant2" id="adD2">Adresse 2</label>
-					<input type="text" id="adresseDoctorant2" name="adresseDoc2" value=""  size="50" maxlength="50" />
+					<input type="text" id="adresseDoctorant2" name="adresseDoc2" value=""  size="20" maxlength="50" />
 					<br/>
 					
 					<label for="villeDoctorant" id="villeD">Ville du Doctorant</label>
@@ -205,7 +203,7 @@ function afficherMenuGestionDoctorant(){
 					<br/>
 					
 					<label for="publiable" id="publiD">Données publiables</label>
-					<input type="checkbox" id="publiable" name="publi" value="puliableOk">
+					<input type="checkbox" id="publiable" name="publi" value="puliableOk"/>
 					<br/>
 				</section>
 					
@@ -215,24 +213,21 @@ function afficherMenuGestionDoctorant(){
 					<br/>
 					
 					<label>Sexe</label>
-					<input type="radio" id="sexeH" name="sexe" value="homme">
-					<label for="sexeH">H</label>
-			
-					<input type="radio" id="sexeF" name="sexe" value="femme" onclick="cacher(this)">
-					<label for="sexeF">F</label>
-					<br/>
+					<input type="radio" id="sexeH" name="sexe" value="homme" checked="checked"/>H
+					<input type="radio" id="sexeF" name="sexe" value="femme" onclick="cacher(this)"/>F
+					<br/><br/>
 					
 					<label for="INEDoctorant" id="INED">Numéro Apogée INE</label>
-					<input type="number" id="INEDoctorant" name="INEDoc" value=""  size="20" maxlength="20" />  
+					<input type="text" id="INEDoctorant" name="INEDoc" value=""  size="20" maxlength="20" />  
+					<br/>
 					
-					<br/>	
-	<!--- TODO avec la base de donnée-->
 					<label for="paysOrigine" id="paysOD">Pays d\'origine</label>
-					<select id="paysOrigine">
-						<option value="France" selected>France</option> 
-						<option value="Angl" >Angleterre</option>
-						<option value="All">Allemagne</option>
-					</select>
+					<select id="paysOrigine">';
+					while($resultat=mysql_fetch_object($informations["lesPays"])){
+						echo '<option value="'.$resultat->CODE_PAYS.'">'.$resultat->NOM_PAYS.'</option>';
+					}
+					echo
+					'</select>
 					
 					<br/>				
 					<label for="nomParentDoc" id="nomP">Nom des parents</label>
@@ -256,111 +251,98 @@ function afficherMenuGestionDoctorant(){
 					
 					<br/>
 					<label for="commentaireDoctorant" id="comD">Commentaire</label>
-					<TEXTAREA id="commentaireDoctorant" name="commentaire" rows=4 cols=40>Commentaires</TEXTAREA>
+					<TEXTAREA id="commentaireDoctorant" name="commentaire" rows=4 cols=40 placeholder="Commentaires"></TEXTAREA>
 
 					<br/>
 					<label for="abandon" id="abandonD">Abandon de thèse </label>
-					<input type="checkbox" id="abandon" name="DocAbandon" value="abandonDoctorant">
+					<input type="checkbox" id="abandon" name="DocAbandon" value="abandonDoctorant"/>
 					</section>
 				
 				</form>
 				
-
-			</div>
-
-				<br/>	
-<!--- TODO avec la base de donnée-->
-				<label for="paysOrigine" id="paysOD">Pays d\'origine</label>
-				<select id="paysOrigine">';
-				while($resultat=mysql_fetch_object($informations["lesPays"])){
-					echo '<option value="'.$resultat->CODE_PAYS.'">'.$resultat->NOM_PAYS.'</option>';
-				}
-				echo
-				'</select>
-
-				
+			</div>			
 			
 			<div id="these">
 				<form method="POST" >
 					<div id="sectionGauche">
-					
-						<label for="labo" id="laboI">Laboratoire d\'inscription</label>
-	<!--- TODO avec BDD-->					
-						<select id="labo">
-						<option value="labo1" selected>labo1</option> 
-						<option value="labo2" >labo2</option>
-						<option value="labo3">labo3</option>
-					</select>
-					<br/><br/>
-					
-	<!---TODO-->				
-					<input type="button" value="Ajouter un laboratoire">
-					<br/><br/>	
 						
-					<label for="compo" id="compoI">Composition inscription</label>
-	<!--- TODO avec BDD-->					
+						<label for="labo" id="laboI">Laboratoire d\'inscription</label>
+<!--- TODO avec BDD-->					
+						<select id="labo">
+							<option value="labo1" selected>labo1</option> 
+							<option value="labo2" >labo2</option>
+							<option value="labo3">labo3</option>
+						</select>
+						<br/>
+						
+<!---TODO voir a supprimer-->				
+						<input type="button" value="Ajouter un laboratoire"/>
+						<br/>	
+							
+						<label for="compo" id="compoI">Composante inscription</label>
+<!--- TODO avec BDD-->					
 						<select id="compo">
-						<option value="comp1" selected>comp1</option> 
-						<option value="comp2" >comp2</option>
-						<option value="comp3">comp3</option>
-					</select>
-					<br/>
-					
-					<label for="discipline" id="discipline">Discipline</label>
-	<!--- TODO avec BDD-->					
+							<option value="comp1" selected>comp1</option> 
+							<option value="comp2" >comp2</option>
+							<option value="comp3">comp3</option>
+						</select>
+						<br/>
+						
+						<label for="discipline" id="discipline">Discipline</label>
+<!--- TODO avec BDD-->					
 						<select id="discipline">
-						<option value="d1" selected>d1</option> 
-						<option value="d2" >d2</option>
-						<option value="d3">d3</option>
-					</select>
-					<br/><br/>
-					
-	<!---TODO-->				
-					<input type="button" value="Ajouter un directeur">
-					<br/><br/>	
-					
-					<label for="directeur" id="directeur">Directeur</label>
-	<!--- TODO avec BDD-->					
+							<option value="d1" selected>d1</option> 
+							<option value="d2" >d2</option>
+							<option value="d3">d3</option>
+						</select>
+						<br/>
+						
+<!---TODO voir a supprimer-->				
+						<input type="button" value="Ajouter un directeur"/>
+						<br/>	
+						
+						<label for="directeur" id="directeur">Directeur</label>
+<!--- TODO avec BDD-->					
 						<select id="directeur">
-						<option value="dir1" selected>dir1</option> 
-						<option value="dir2" >dir2</option>
-						<option value="dir3">dir3</option>
-					</select>
-					<br/>
-					
-					<label for="codirecteur" id="codirecteur">Codirecteur</label>
-	<!--- TODO avec BDD-->					
+							<option value="dir1" selected>dir1</option> 
+							<option value="dir2" >dir2</option>
+							<option value="dir3">dir3</option>
+						</select>
+						<br/>
+						
+						<label for="codirecteur" id="codirecteur">Codirecteur</label>
+<!--- TODO avec BDD-->					
 						<select id="codirecteur">
-						<option value="codir1" selected>codir1</option> 
-						<option value="codir2" >codir2</option>
-						<option value="codir3">codir3</option>
-					</select>
-					<br/><br/>
-					
-					<label for="laboExercice" id="laboExercice">Laboratoire exercice</label>
-	<!--- TODO avec BDD-->					
+							<option value="codir1" selected>codir1</option> 
+							<option value="codir2" >codir2</option>
+							<option value="codir3">codir3</option>
+						</select>
+						<br/>
+						
+						<label for="laboExercice" id="laboExercice">Laboratoire exercice</label>
+<!--- TODO avec BDD-->					
 						<select id="laboExercice">
-						<option value="laboE1" selected>laboE1</option> 
-						<option value="laboE2" >laboE2</option>
-						<option value="laboE3">laboE3</option>
-					</select>
-					<br/>
-					
-					<label for="telLabo" id="telL">Téléphone Laboratoire</label>
-					<input type="tel" id="telLabo" name="telLabo" value=""  size="20" maxlength="20" />
-					<br/>
-					
-					<label for="posteLabo" id="posteL">Poste Laboratoire</label>
-					<input type="tel" id="posteLabo" name="posteLabo" value=""  size="20" maxlength="20" />
-					<br/>
-					
-					<label for="faxLabo" id="faxL">Fax Laboratoire</label>
-					<input type="tel" id="faxLabo" name="faxLabo" value=""  size="20" maxlength="20" />
-					<br/>
-					
-					<label for="mailLabo" id="mailL">E-mail laboratoire</label>
-					<input type="email" id="mailLabo" name="mailLabo" value=""  size="20" maxlength="20" />
-					<br/>
+							<option value="laboE1" selected>laboE1</option> 
+							<option value="laboE2" >laboE2</option>
+							<option value="laboE3">laboE3</option>
+						</select>
+						<br/>
+						
+						<label for="telLabo" id="telL">Téléphone Laboratoire</label>
+						<input type="tel" id="telLabo" name="telLabo" value=""  size="20" maxlength="20" />
+						<br/>
+						
+						<label for="posteLabo" id="posteL">Poste Laboratoire</label>
+						<input type="tel" id="posteLabo" name="posteLabo" value=""  size="20" maxlength="20" />
+						<br/>
+						
+						<label for="faxLabo" id="faxL">Fax Laboratoire</label>
+						<input type="tel" id="faxLabo" name="faxLabo" value=""  size="20" maxlength="20" />
+						<br/>
+						
+						<label for="mailLabo" id="mailL">E-mail laboratoire</label>
+						<input type="email" id="mailLabo" name="mailLabo" value=""  size="20" maxlength="20" />
+						<br/>
 					
 					</div>
 				
@@ -410,18 +392,18 @@ function afficherMenuGestionDoctorant(){
 							<br/>
 							
 							<label for="cies" id="cies">Moniteur CIES</label>
-							<input type="checkbox" id="cies" name="cies" value="cies">
+							<input type="checkbox" id="cies" name="cies" value="cies"/>
 						</div>
 				
 					</div>
-					<br/><br/><br/>
+					<br/>
 					
 					<!---<hr size="4" width="100%" color="black"> -->
 					
 					<div id="bas">
-						<input type="button" value="Inscription année 2">
-						<input type="button" value="Inscription année 3">
-						<input type="button" value="Inscription année 4">
+						<input type="button" value="Inscription année 2"/>
+						<input type="button" value="Inscription année 3"/>
+						<input type="button" value="Inscription année 4"/>
 						<br/>
 						
 						<label for="2A" id="insc2A">Inscription 2A:</label>
@@ -454,41 +436,183 @@ function afficherMenuGestionDoctorant(){
  
 			<div id="prethese">
 				<form method="POST">
-					<input type="radio" id="contactChoice1" name="contact" value="email">
-					<label for="contactChoice1">Email</label>
-			
-					<input type="radio" id="contactChoice2" name="contact" value="telephone">
-					<label for="contactChoice2">Téléphone</label>
-
-					<input type="radio" id="contactChoice3" name="contact" value="courrier">
-					<label for="contactChoice3">Courrier</label>
+						<label for="proAvant" id="proAvant">Profession antérieure:</label>
+<!--- TODO avec BDD-->					
+						<select id="professionAvant">
+							<option value="1" selected>1</option> 
+							<option value="2" >2</option>
+							<option value="3">3</option>
+						</select>
+						<br/>
+						
+						<label for="diplomeInsc" id="diplomeInsc">Diplôme inscription:</label>
+<!--- TODO avec BDD-->					
+						<select id="diplomeInscri">
+							<option value="1" selected>1</option> 
+							<option value="2" >2</option>
+							<option value="3">3</option>
+						</select>
+						<br/>
+						
+						<label for="diplomeComp" id="diplomeComp">Diplôme complémentaire:</label>
+<!--- TODO avec BDD-->					
+						<select id="diplomeComplementaire">
+							<option value="1" selected>1</option> 
+							<option value="2" >2</option>
+							<option value="3">3</option>
+						</select>
+						<br/>
+						
+						<label for="dea" id="dea">Numéro du DEA:</label>
+						<input type="text" id="dea" name="dea" value=""/>
+						<br/>
+						
+						<label for="dea1" id="dea1">DEA:</label>
+						<input type="text" id="dea1" name="dea" value=""/>
+						<br/>
+						
+						<label for="anneedea" id="anneedea">Année du DEA:</label>
+						<input type="text" id="anneedea" name="andea" value="0"/>
+						<br/>
+						
+						<label for="univdea" id="univdea">Université du DEA:</label>
+						<input type="text" id="univdea" name="universitedea" value=""/>
+						<br/>
+						
+						<label for="moydea" id="moydea">Moyenne du DEA:</label>
+						<input type="text" id="moydea" name="moydea" value="0"/>
+						<br/>
+						
+						<label for="classement" id="class">Classement:</label>
+						<input type="text" id="classement" name="classement" value="0"/>
+						<br/>
+						
+						<label for="effdea" id="effectifdea">Effectif du DEA:</label>
+						<input type="text" id="effdea" name="effdea" value="0"/>
+						<br/>
 				</form>
 			</div>
 				
-			<div id="1A">
+			<div id="cours">
 				<form method="POST">
-				
+					<div id="annee1">
+						<h1 id="anne1">Première année</h1>
+					
+							<label id="CDA1">Cours disciplinaire</label>
+<!--- TODO avec BDD-->					
+							<select id="cda1suivi">
+								<option value="1" selected>1</option> 
+								<option value="2" >2</option>
+								<option value="3">3</option>
+							</select>
+							
+							<label for="cda1valide" id="cda1val">Validé</label>
+							<input type="checkbox" id="cda1valide"/>
+							<br/><br/>
+							
+							<label id="MSA1">Module spécifique</label>
+<!--- TODO avec BDD-->					
+							<select id="msa1suivi">
+								<option value="1" selected>1</option> 
+								<option value="2" >2</option>
+								<option value="3">3</option>
+							</select>
+							
+							<label for="msa1valide" id="msa1val" >Validé</label>
+							<input type="checkbox" id="msa1valide"/>
+							<br/><br/>
+							
+							<label id="CSA1">Cours supplémentaire</label>
+<!--- TODO avec BDD-->					
+							<select id="csa1suivi">
+								<option value="1" selected>1</option> 
+								<option value="2" >2</option>
+								<option value="3">3</option>
+							</select>
+							
+							<label for="csa1valide" id="csa1val">Validé</label>
+							<input type="checkbox" id="csa1valide"/>
+							<br/><br/>
+							
+							<label for="commentairea1" id="comA1">Commentaire</label>
+							<TEXTAREA id="commentairea1" name="commentaireA1" rows=4 cols=40 placeholder="Commentaires"></TEXTAREA>
+					</div>
+					
+					<div id="annee2">
+						<h1 id="anne2">Deuxième année</h1>
+					
+							<label id="CDA2">Cours disciplinaire</label>
+<!--- TODO avec BDD-->					
+							<select id="cda2suivi">
+								<option value="1" selected>1</option> 
+								<option value="2" >2</option>
+								<option value="3">3</option>
+							</select>
+							
+							<label for="cda2valide" id="cda2val">Validé</label>
+							<input type="checkbox" id="cda2valide"/>
+							<br/><br/>
+							
+							<label id="MSA2">Module spécifique</label>
+<!--- TODO avec BDD-->					
+							<select id="msa2suivi">
+								<option value="1" selected>1</option> 
+								<option value="2" >2</option>
+								<option value="3">3</option>
+							</select>
+							
+							<label for="msa2valide" id="msa2val" >Validé</label>
+							<input type="checkbox" id="msa2valide"/>
+							<br/><br/>
+							
+							<label id="CSA2">Cours supplémentaire</label>
+<!--- TODO avec BDD-->					
+							<select id="csa2suivi">
+								<option value="1" selected>1</option> 
+								<option value="2" >2</option>
+								<option value="3">3</option>
+							</select>
+							
+							<label for="csa2valide" id="csa2val">Validé</label>
+							<input type="checkbox" id="csa2valide"/>
+							<br/><br/>
+							
+							<label for="commentairea2" id="comA2">Commentaire</label>
+							<TEXTAREA id="commentairea2" name="commentaireA2" rows=4 cols=40 placeholder="Commentaires"></TEXTAREA>
+					</div>
+					
+					<div id="annee3">
+						<h1 id="anne3">Troisième année</h1>
+												
+							<label id="MSA3">Module spécifique</label>
+<!--- TODO avec BDD-->					
+							<select id="msa3suivi">
+								<option value="1" selected>1</option> 
+								<option value="2" >2</option>
+								<option value="3">3</option>
+							</select>
+							
+							<label for="msa3valide" id="msa3val" >Validé</label>
+							<input type="checkbox" id="msa3valide"/>
+							<br/><br/>
+							
+							<label id="CSA3">Cours supplémentaire</label>
+<!--- TODO avec BDD-->					
+							<select id="csa3suivi">
+								<option value="1" selected>1</option> 
+								<option value="2" >2</option>
+								<option value="3">3</option>
+							</select>
+							
+							<label for="csa3valide" id="csa3val">Validé</label>
+							<input type="checkbox" id="csa3valide"/>
+							<br/><br/>
+							
+							<label for="commentairea3" id="comA3">Commentaire</label>
+							<TEXTAREA id="commentairea3" name="commentaireA3" rows=4 cols=40 placeholder="Commentaires"></TEXTAREA>
+					</div>
 
 				</form>
-
-				<br/>
-				<label for="commentaireDoctorant" id="comD">Commentaire</label>
-				<TEXTAREA id="commentaireDoctorant" name="commentaire" placeholder="Commentaire" rows=4 cols=40></TEXTAREA>
-
-
-			</div>
-			
-			<div id="2A">
-				<form method="POST">
-				
-				</form>		
-			</div>
-			
-			<div id="3A">
-				<form method="POST">
-				
-				</form>
-			
 			</div>
 			
 			<div id="soutenance">
@@ -521,7 +645,7 @@ function afficherMenuGestionDoctorant(){
 function afficherBoutonMenu(){
 	echo '
 	<form id="monForm" method="post" action="Doctorant.php">
-	<input type="submit" value="Retour au menu" name="go_To_Menu" />
+	<input type="submit" value="Retour au menu" name="go_To_Menu" id="boutonRetourMenu"/>
 	</form>';
 }
 

@@ -3,58 +3,60 @@
 /*-----------------------------------------------------------------------------------------*/
 label
 {
-	position:relative;
-	/*text-align:right;*/
-	
+	/*position:relative;*/
+	display: block;
+	float:left;	
+	width:230px;
+	margin-top:0.5em;
 }
 
 input 
 {
-	position:relative;
-	margin-left:10px;
-	margin-top:0.5em;
-	
+	/*float:left;*/
+	/*position:relative;*/
+	/*margin-left:10px;*/
+	margin-top:0.5em;	
 }
 
 select
 {
+	display: block;
+	/*float:left;*/
 	margin-top:0.5em;
+	width:200px;
 }
 
 textarea
 {
 	margin-top:0.5em;
+	resize:none;
+}
+
+checkbox, radio
+{
+	display: block;
+	float:left;
+	cursor: pointer;
 }
 
 #sectionGauche
 {
 	margin-left:0;
 	float:left;
-	width:500px;
+	width:600px;
 }
 
 #sectionDroite
 {
 	float:right;
+	width:600px;
 	/*position:relative;*/
 	margin-left: 20px;
-}
-
-
-checkbox, radio
-{
-	cursor: pointer;
 }
 
 #nomDepouse, #nomED
 {
 	visibility:hidden;
-}
-
-<<<<<<< HEAD
-textarea
-{
-	resize:none;
 }
 
 #cadre
@@ -73,50 +75,39 @@ textarea
 	margin-left:0;
 }
 
-/*hr
-{
-	position:absolute;
-}*/
-
-select
-{
-	width:200px;
-}
-
-#sujetThese, #cotutelle, #financement
+#sujetThese, #cotutelle, #financement, #CDA1, #MSA1, #CSA1,#CDA2, #MSA2, #CSA2, #MSA3, #CSA3
 {
 	font-size:20px;
 	font-weight:bold;
 }
-=======
 
-/* essai affichage nom epouse quand sexe feminin coche
-.sexeF::after
+#CSA1, #CSA2, #CSA3
 {
-	display:none;
-	/*visibility:visible;
+	width:260px;
 }
 
-input:checked + .sexeF::after
+#annee1, #annee2, #annee3
 {
-	display:block;
-	/*visibility:visible;
+	border-style: double;
+	width:1300px;
+	border-radius:5px;
+	padding-bottom:0.2em;
+	padding-left:0.2em;
+	padding-right:.2em;
+	margin-top:0.2em;
 }
 
-.effacer
+#cda2val, #msa2val, #csa2val, #cda1val, #msa1val, #csa1val, #msa3val, #csa3val
 {
-	display:none;
-	/*visibility:hidden;
+	width:50px;
+	margin-left:20px;
 }
 
-#sexeF:checked ~ .effacer
+#cda1suivi, #msa1suivi, #csa1suivi,#cda2suivi, #msa2suivi, #csa2suivi,#msa3suivi, #csa3suivi
 {
-	display:block;
-	/*visibility:visible;
+	width:150px;
+	display:inline;
 }
-*/
-
->>>>>>> 4f6c41c0726f08fed9ba601001e1793139f5094b
 
 /*-----------------------------------------------------------------------------------------*/
 /*--------------------------------------ONGLETS--------------------------------------------*/
@@ -131,7 +122,6 @@ input:checked + .sexeF::after
     margin-left : 0;
 }
 
-
 #onglets li
 {
     float : left;
@@ -141,7 +131,6 @@ input:checked + .sexeF::after
     margin : 1px 2px 0 2px;  /* Pour IE  */
     border : 1px solid #9EA0A1;
 }
-
 
 #onglets li.active
 {
@@ -156,13 +145,11 @@ input:checked + .sexeF::after
     text-decoration : none;
     padding : 4px;
 }
-0
 
 #onglets a:hover
 {
     background : #fff;
 }
-
 
 /*-----------------------------------------------------------------------------------------*/
 /*---------------------------------------CACHER LES ONGLETS--------------------------------*/
@@ -174,50 +161,27 @@ input:checked + .sexeF::after
  overflow: hidden ;/* On cache tout ce qui dépasserait de container*/
 }
 
-<<<<<<< HEAD
 #these {
  position: absolute;
- top: -700; left: -700; 
+ top: -800; left: -800; 
 }
 #doctorant {
  position: absolute;
  top: -700; left: -700; 
-=======
-/*#accueil.active{
- position: absolute;
- top: 100; left: 100; 
-}*/
-#accueil {
- position: absolute;
- top: -700; left: 0; 
->>>>>>> 4f6c41c0726f08fed9ba601001e1793139f5094b
 }
 #prethese {
  position: absolute;
-<<<<<<< HEAD
  top: -700; left: 0; 
-=======
- top: -700; left: -700; 
->>>>>>> 4f6c41c0726f08fed9ba601001e1793139f5094b
 }
-#1A {
+#cours {
  position: absolute;
- top: -700; left: 0; 
-} 
-#2A {
- position: absolute;
- top: -700; left: 0; 
-<<<<<<< HEAD
-}
-#3A {
-=======
-} 
+ top: -1500; left: -1500; 
+}  
 #saisie {
  position: absolute;
  top: -700; left: 0; 
 } 
 #stat {
->>>>>>> 4f6c41c0726f08fed9ba601001e1793139f5094b
  position: absolute;
  top: -700; left: 0; 
 } 
@@ -235,23 +199,15 @@ input:checked + .sexeF::after
  position: absolute;
  top: 100; left: 100; 
 }
-#1A:target {
+#cours:target {
  position: absolute;
  top: 100; left: 100; 
 }
-#2A:target {
- position: absolute;
- top: 100; left: 100; 
-}
-<<<<<<< HEAD
-#3A:target {
-=======
 #saisie:target {
  position: absolute;
  top: 100; left: 100; 
 }
 #stat:target {
->>>>>>> 4f6c41c0726f08fed9ba601001e1793139f5094b
  position: absolute;
  top: 100; left: 100; 
 }
