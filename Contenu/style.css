@@ -1,3 +1,9 @@
+#boutonDeconnexion,#boutonRetourMenu{
+	display:block;
+	position:relative;
+	float:right;
+}
+
 /*-----------------------------------------------------------------------------------------*/
 /*-----------------------------STYLE POUR LES LABELS, INPUTS...----------------------------*/
 /*-----------------------------------------------------------------------------------------*/
@@ -59,6 +65,8 @@ checkbox, radio
 	visibility:hidden;
 }
 
+
+/*-----------------Onglet these-----------------*/
 #cadre
 {
 	border: 2px solid black;
@@ -75,40 +83,123 @@ checkbox, radio
 	margin-left:0;
 }
 
-#sujetThese, #cotutelle, #financement, #CDA1, #MSA1, #CSA1,#CDA2, #MSA2, #CSA2, #MSA3, #CSA3
+/*--------------Onglet cours------------------*/
+
+#anne1, #anne2, #anne3
 {
 	font-size:20px;
 	font-weight:bold;
+	text-decoration:underline;
 }
 
-#CSA1, #CSA2, #CSA3
+#sujetThese, #cotutelle, #financement, #CDA1, #MSA1, #CSA1,#CDA2, #MSA2, #CSA2, #MSA3, #CSA3
 {
-	width:260px;
+	font-size:15px;
+	font-weight:bold;
 }
 
-#annee1, #annee2, #annee3
+#CDA1, #MSA1, #CSA1,#CDA2, #MSA2, #CSA2, #MSA3, #CSA3
+{
+	width:230px;
+}
+
+/*Les divs des différentes années de l'onglet cours*/
+div#annee1, div#annee2, div#annee3
 {
 	border-style: double;
-	width:1300px;
+	width:1000px;
 	border-radius:5px;
 	padding-bottom:0.2em;
 	padding-left:0.2em;
-	padding-right:.2em;
 	margin-top:0.2em;
 }
 
+/*Les labels de l'onglets cours*/
 #cda2val, #msa2val, #csa2val, #cda1val, #msa1val, #csa1val, #msa3val, #csa3val
 {
-	width:50px;
+	width:130px;
 	margin-left:20px;
+	display:inline;
+	position:absolute;
 }
 
+/*Les selects de l'onglet cours*/
 #cda1suivi, #msa1suivi, #csa1suivi,#cda2suivi, #msa2suivi, #csa2suivi,#msa3suivi, #csa3suivi
 {
 	width:150px;
 	display:inline;
 }
 
+#commentairea1,#commentairea2, #commentairea3
+{
+	float:right;
+	position:relative;
+	display:inline;
+	bottom:150px;
+	right:130px;
+}
+
+/*----------------Onglet soutenance-------------*/
+#2rapports,#doctorat,#nomdoctorat
+{
+	width:500px;
+	margin-right:0.5em;
+	/*margin-top:0.5em;*/
+}
+
+#dateValidRapp,#dateCompositionJury,#edstnonvalide,#desRapports,#copoJury
+{
+	width:450px;
+	margin-right:0.5em;
+}
+
+#inscsout,#desrapp,#compJury,#2rapp
+{
+	/*margin-left:40px;*/
+}
+
+/*triche pour placement des input de date*/
+#dateValidationRapp,#dateCompoJury
+{
+	position:absolute;
+	margin-top:5.7em;
+	/*margin-left:0.5em;*/
+	
+}
+/*---------------Onglet post these------------*/
+#PT1,#PT2,#PT3
+{
+	border: 2px solid black;
+	margin-top:0.8em;
+	margin-bottom:0.5em;
+	width:1300px;
+	/*display:inline-block;*/
+}
+
+#aterAvSout,#formationComp,#postdoc,#dureepostdoc,#succesqualif
+{
+	width:400px;
+}
+
+/*----------Onglet these +2 et +3---------*/
+#departement3,#departement,#doctorantdeter3,#doctorantdeter,#paysjob3,#paysjob,#recrutement3,#recrutement
+{
+	width:360px;
+	/*position:absolute;
+	display:inline;*/
+}
+
+#salaire3,#salaire
+{
+	/*display:block;
+	position:relative;*/
+}
+
+#euro3, #euro
+{
+	float:right;
+	margin-left:5px;
+}
 /*-----------------------------------------------------------------------------------------*/
 /*--------------------------------------ONGLETS--------------------------------------------*/
 /*-----------------------------------------------------------------------------------------*/
@@ -161,53 +252,25 @@ checkbox, radio
  overflow: hidden ;/* On cache tout ce qui dépasserait de container*/
 }
 
-#these {
+#these 
+{
  position: absolute;
- top: -800; left: -800; 
+ top: -800px; left: -800px; 
 }
-#doctorant {
+#prethese,#saisie,#stat,#soutenance,#doctorant,#postthese,#Tdeux,#Ttrois
+{
  position: absolute;
- top: -700; left: -700; 
+ top: -700px; left: -700px; 
 }
-#prethese {
+#cours 
+{
  position: absolute;
- top: -700; left: 0; 
-}
-#cours {
- position: absolute;
- top: -1500; left: -1500; 
+ top: -1500px; left: -1500px; 
 }  
-#saisie {
- position: absolute;
- top: -700; left: 0; 
-} 
-#stat {
- position: absolute;
- top: -700; left: 0; 
-} 
 
 
-#these:target{
+#these:target,#doctorant:target,#prethese:target,#cours:target,#saisie:target ,#stat:target,#soutenance:target,#postthese:target,#Tdeux:target,#Ttrois:target
+{
  position: absolute;
- top: 100; left: 100; 
-}
-#doctorant:target {
- position: absolute;
- top: 100; left: 100;  
-}
-#prethese:target {
- position: absolute;
- top: 100; left: 100; 
-}
-#cours:target {
- position: absolute;
- top: 100; left: 100; 
-}
-#saisie:target {
- position: absolute;
- top: 100; left: 100; 
-}
-#stat:target {
- position: absolute;
- top: 100; left: 100; 
+ top: 100px; left: 100px; 
 }

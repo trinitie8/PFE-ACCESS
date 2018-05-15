@@ -1,6 +1,6 @@
 <?php
 function afficherAccueil(){
-	$contenu='';
+	$var='';
 	require_once('acceuil.php');
 	}
 	
@@ -13,7 +13,7 @@ function setCharSet(){
 }
 	
 function afficherErreur($erreur){
-	$contenu='<p>'.$erreur.'</p> <p> Par mesure de sécurité vous avez été déconnecté. </p>';
+	$var='<p>'.$erreur.'</p> <p> Par mesure de sécurité vous avez été déconnecté. </p>';
 	require_once('acceuil.php');
 	}
 
@@ -51,13 +51,13 @@ function afficherMenu(){
  
  
 			<div id="stat">
-				<input type="radio" id="contactChoice1" name="contact" value="email">
+				<input type="radio" id="contactChoice1" name="contact" value="email"/>
 				<label for="contactChoice1">Email</label>
 		
-				<input type="radio" id="contactChoice2" name="contact" value="telephone">
+				<input type="radio" id="contactChoice2" name="contact" value="telephone"/>
 				<label for="contactChoice2">Téléphone</label>
 
-				<input type="radio" id="contactChoice3" name="contact" value="courrier">
+				<input type="radio" id="contactChoice3" name="contact" value="courrier"/>
 				<label for="contactChoice3">Courrier</label>
 				
 			</div>
@@ -97,8 +97,6 @@ function afficherInscription(){
 		<br />
 		<br/>
 		
-		<?php echo $contenu; ?>
-		
 	</fieldset>
 	</form>
 	<form method="post" action="Doctorant.php">
@@ -117,7 +115,8 @@ function afficherDeconnexion(){
 
 
 function afficherMenuGestionDoctorant($informations){
-	echo '<head>
+	echo '
+	<head>
 		<link href="Contenu/style.css" type="text/css" rel="stylesheet" />
 		
 		
@@ -132,6 +131,16 @@ function afficherMenuGestionDoctorant($informations){
 			}
 	}
 	</script>
+	
+	<script language="JavaScript">
+	function activer_checkbox(){
+		var check = document.getElementById("jobfr3");
+		var texte = document.getElementById("dep3").value;
+		if(texte != ""){
+			check.disabled = true;
+		}
+	}
+	</script>
 		
 	</head>
 	
@@ -143,18 +152,18 @@ function afficherMenuGestionDoctorant($informations){
 				<li><a href="#cours"> Cours </a></li>
 				<li><a href="#soutenance"> Soutenance </a></li>
 				<li><a href="#postthese"> Post thèse </a></li>
-				<li><a href="#these+2"> Thèse +2 </a></li>
-				<li><a href="#these+3"> Thèse +3 </a></li>
+				<li><a href="#Tdeux"> Thèse +2</a></li>
+				<li><a href="#Ttrois"> Thèse +3 </a></li>
 			</ul>
 	</div>
 	
 			
 	<div id="container">	
-	
-			<div id="doctorant">
-			
-				<form method="POST" >
-				
+		<form method="POST" >
+		
+		<input type="submit" value="Enregistrer" name="enregistrerDoctorant" id="boutonEnregistrerDoctorant"/>
+		
+			<div id="doctorant">				
 				<section id="sectionGauche">
 					<label for="nomDoctorant" id="nomD">Nom du Doctorant</label>
 					<input type="text" id="nomDoctorant" name="nomDoc" value=""  size="20" maxlength="20" />
@@ -222,11 +231,13 @@ function afficherMenuGestionDoctorant($informations){
 					<br/>
 					
 					<label for="paysOrigine" id="paysOD">Pays d\'origine</label>
-					<select id="paysOrigine">';
-					while($resultat=mysql_fetch_object($informations["lesPays"])){
-						echo '<option value="'.$resultat->CODE_PAYS.'">'.$resultat->NOM_PAYS.'</option>';
-					}
-					echo
+					<select id="paysOrigine" name="paysOD">';
+							$resultat=$informations["lesPays"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->CODE_PAYS.'">'.$resultat[$x]->NOM_PAYS.'</option>';
+							}
+							echo
 					'</select>
 					
 					<br/>				
@@ -257,21 +268,23 @@ function afficherMenuGestionDoctorant($informations){
 					<label for="abandon" id="abandonD">Abandon de thèse </label>
 					<input type="checkbox" id="abandon" name="DocAbandon" value="abandonDoctorant"/>
 					</section>
-				
-				</form>
-				
 			</div>			
 			
+			
+			
+			
+			
 			<div id="these">
-				<form method="POST" >
 					<div id="sectionGauche">
 						
-						<label for="labo" id="laboI">Laboratoire d\'inscription</label>
-<!--- TODO avec BDD-->					
-						<select id="labo">
-							<option value="labo1" selected>labo1</option> 
-							<option value="labo2" >labo2</option>
-							<option value="labo3">labo3</option>
+						<label for="labo" id="laboI">Laboratoire d\'inscription</label>				
+						<select id="labo" name="laboInsc">';
+							$resultat=$informations["lesLabos"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->NUM_DE_LABORATOIRE.'">'.$resultat[$x]->NOM_LABORATOIRE.'</option>';
+							}
+							echo '
 						</select>
 						<br/>
 						
@@ -279,21 +292,25 @@ function afficherMenuGestionDoctorant($informations){
 						<input type="button" value="Ajouter un laboratoire"/>
 						<br/>	
 							
-						<label for="compo" id="compoI">Composante inscription</label>
-<!--- TODO avec BDD-->					
-						<select id="compo">
-							<option value="comp1" selected>comp1</option> 
-							<option value="comp2" >comp2</option>
-							<option value="comp3">comp3</option>
+						<label for="compo" id="compoI">Composante inscription</label>				
+						<select id="compo" name="compoInsc">';
+							$resultat=$informations["lesCompos"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->NUM_COMPOSANTE.'">'.$resultat[$x]->LIBELLE_COMPOSANTE.'</option>';
+							}
+							echo '
 						</select>
 						<br/>
 						
-						<label for="discipline" id="discipline">Discipline</label>
-<!--- TODO avec BDD-->					
-						<select id="discipline">
-							<option value="d1" selected>d1</option> 
-							<option value="d2" >d2</option>
-							<option value="d3">d3</option>
+						<label for="discipline" id="discipline">Discipline</label>				
+						<select id="discipline" name="discipline">';
+							$resultat=$informations["lesDisciplines"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->CODE_DISCIPLINE.'">'.$resultat[$x]->NOM_DISCIPLINE.'</option>';
+							}
+							echo '
 						</select>
 						<br/>
 						
@@ -301,30 +318,36 @@ function afficherMenuGestionDoctorant($informations){
 						<input type="button" value="Ajouter un directeur"/>
 						<br/>	
 						
-						<label for="directeur" id="directeur">Directeur</label>
-<!--- TODO avec BDD-->					
-						<select id="directeur">
-							<option value="dir1" selected>dir1</option> 
-							<option value="dir2" >dir2</option>
-							<option value="dir3">dir3</option>
+						<label for="directeur" id="directeur">Directeur</label>		
+						<select id="directeur"  name="directeur">';
+							$resultat=$informations["lesChercheurs"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->NUM_CHERCHEUR.'">'.$resultat[$x]->NOM_CHERCHEUR.' '.$resultat[$x]->PRENOM_CHERCHEUR.'</option>';
+							}
+							echo '
 						</select>
 						<br/>
 						
 						<label for="codirecteur" id="codirecteur">Codirecteur</label>
-<!--- TODO avec BDD-->					
-						<select id="codirecteur">
-							<option value="codir1" selected>codir1</option> 
-							<option value="codir2" >codir2</option>
-							<option value="codir3">codir3</option>
+						<select id="codirecteur" name="coDir">';
+							$resultat=$informations["lesChercheurs"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->NUM_CHERCHEUR.'">'.$resultat[$x]->NOM_CHERCHEUR.' '.$resultat[$x]->PRENOM_CHERCHEUR.'</option>';
+							}
+							echo '
 						</select>
 						<br/>
 						
-						<label for="laboExercice" id="laboExercice">Laboratoire exercice</label>
-<!--- TODO avec BDD-->					
-						<select id="laboExercice">
-							<option value="laboE1" selected>laboE1</option> 
-							<option value="laboE2" >laboE2</option>
-							<option value="laboE3">laboE3</option>
+						<label for="laboExercice" id="laboExercice">Laboratoire exercice</label>				
+						<select id="laboExercice" name="laboEx">';
+							$resultat=$informations["lesLabos"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->NUM_DE_LABORATOIRE.'">'.$resultat[$x]->NOM_LABORATOIRE.'</option>';
+							}
+							echo '
 						</select>
 						<br/>
 						
@@ -354,16 +377,18 @@ function afficherMenuGestionDoctorant($informations){
 						<div id="cadre">
 							<label for="cotutelle" id="cotutelle">Co Tutelle</label>
 							<br/>
-							<input type="checkbox" id="cotutelleok" name="cotutelleok" value="cotutellOk">
+							<input type="checkbox" id="cotutelleok" name="cotutelleok" value="cotutellOk"/>
 							<label for="oui" id="oui">Cocher si oui</label>
 							<br/>
 							
-							<label for="paysCoTut" id="paysCoTut">Pays Co Tutelle</label>
-<!--- TODO avec BDD-->					
-							<select id="paysCoTutelle">
-								<option value="p1" selected>p1</option> 
-								<option value="p2" >p2</option>
-								<option value="lp3">p3</option>
+							<label for="paysCoTut" id="paysCoTut">Pays Co Tutelle</label>			
+							<select id="paysCoTutelle" name="paysCoTutelle">';
+							$resultat=$informations["lesPays"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->CODE_PAYS.'">'.$resultat[$x]->NOM_PAYS.'</option>';
+							}
+							echo '
 							</select>
 							
 							<label for="univ" id="univ">Université</label>
@@ -377,12 +402,14 @@ function afficherMenuGestionDoctorant($informations){
 							<input type="date" id="debutAlloc" name="alloc" value=""  size="20" maxlength="20" />
 							<br/>
 							
-							<label for="codefinancement" id="codefinancement">Code financement</label>
-<!--- TODO avec BDD-->					
-							<select id="codeFinancement">
-								<option value="sans" selected>Sans financement au titre de la thèse</option> 
-								<option value="avec" >ok</option>
-								<option value="avec1">avec</option>
+							<label for="codefinancement" id="codefinancement">Code financement</label>				
+							<select id="codeFinancement" name="codeFinancement">';
+							$resultat=$informations["lesFinancements"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->CODE_FINANCEMENT.'">'.$resultat[$x]->FINANCEMENT.'</option>';
+							}
+							echo'
 							</select>
 							<br/>
 							
@@ -391,7 +418,7 @@ function afficherMenuGestionDoctorant($informations){
 							<TEXTAREA id="compInfo" name="compInfo" rows=8 cols=50></TEXTAREA>
 							<br/>
 							
-							<label for="cies" id="cies">Moniteur CIES</label>
+							<label for="cies" id="mcies">Moniteur CIES</label>
 							<input type="checkbox" id="cies" name="cies" value="cies"/>
 						</div>
 				
@@ -406,60 +433,74 @@ function afficherMenuGestionDoctorant($informations){
 						<input type="button" value="Inscription année 4"/>
 						<br/>
 						
-						<label for="2A" id="insc2A">Inscription 2A:</label>
-<!--- TODO avec BDD-->					
-						<select id="insc2Achoix">
-							<option value="1" selected>1</option> 
-							<option value="2" >2</option>
-							<option value="3">3</option>
+						<label for="2A" id="insc2A">Inscription 2A:</label>				
+						<select id="insc2Achoix" name="anneeIns2">';
+							$resultat=$informations["lesAnnees"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->NUM_ANNEE.'">'.$resultat[$x]->ANNEE.'</option>';
+							}
+							echo'
 						</select>
 						
-						<label for="3A" id="insc3A">Inscription 3A:</label>
-<!--- TODO avec BDD-->					
-						<select id="insc3Achoix">
-							<option value="1" selected>1</option> 
-							<option value="2" >2</option>
-							<option value="3">3</option>
+						<label for="3A" id="insc3A">Inscription 3A:</label>			
+						<select id="insc3Achoix"  name="anneeIns3">';
+							$resultat=$informations["lesAnnees"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->NUM_ANNEE.'">'.$resultat[$x]->ANNEE.'</option>';
+							}
+							echo'
 						</select>
 							
-						<label for="4A" id="insc4A">Inscription 4A:</label>
-<!--- TODO avec BDD-->					
-						<select id="insc4Achoix">
-							<<option value="1" selected>1</option> 
-							<option value="2" >2</option>
-							<option value="3">3</option>
+						<label for="4A" id="insc4A">Inscription 4A:</label>			
+						<select id="insc4Achoix"  name="anneeIns4">';
+							$resultat=$informations["lesAnnees"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->NUM_ANNEE.'">'.$resultat[$x]->ANNEE.'</option>';
+							}
+							echo'
 						</select>
 					</div>
-				</form>
 			</div>
  
  
+ 
+ 
 			<div id="prethese">
-				<form method="POST">
-						<label for="proAvant" id="proAvant">Profession antérieure:</label>
-<!--- TODO avec BDD-->					
-						<select id="professionAvant">
-							<option value="1" selected>1</option> 
-							<option value="2" >2</option>
-							<option value="3">3</option>
+						<label for="proAvant" id="proAvant">Profession antérieure:</label>		
+						<select id="professionAvant" name="professionAvant">';
+							$resultat=$informations["lesProfAvant"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->NUM_PROFESSION_AVANT_THESE.'">'.$resultat[$x]->PROFESSION_ANTERIEURE.'</option>';
+							}
+							echo'
 						</select>
 						<br/>
 						
 						<label for="diplomeInsc" id="diplomeInsc">Diplôme inscription:</label>
-<!--- TODO avec BDD-->					
-						<select id="diplomeInscri">
-							<option value="1" selected>1</option> 
-							<option value="2" >2</option>
-							<option value="3">3</option>
+						<select id="diplomeInscri" name="diplomeInscri">';
+							$resultat=$informations["lesDiplomes"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								if($resultat[$x]->DIPLOME_INSCRIPTION)
+									echo '<option value="'.$resultat[$x]->NUM_DIPLOME.'">'.$resultat[$x]->LIBELLE_DIPLOME.'</option>';
+							}
+							echo'
 						</select>
 						<br/>
 						
-						<label for="diplomeComp" id="diplomeComp">Diplôme complémentaire:</label>
-<!--- TODO avec BDD-->					
-						<select id="diplomeComplementaire">
-							<option value="1" selected>1</option> 
-							<option value="2" >2</option>
-							<option value="3">3</option>
+						<label for="diplomeComp" id="diplomeComp">Diplôme complémentaire:</label>			
+						<select id="diplomeComplementaire" name=diplomeComplementaire">';
+							$resultat=$informations["lesDiplomes"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								if($resultat[$x]->DIPLOME_COMPLEMENTAIRE)
+									echo '<option value="'.$resultat[$x]->NUM_DIPLOME.'">'.$resultat[$x]->LIBELLE_DIPLOME.'</option>';
+							}
+							echo'
 						</select>
 						<br/>
 						
@@ -490,155 +531,424 @@ function afficherMenuGestionDoctorant($informations){
 						<label for="effdea" id="effectifdea">Effectif du DEA:</label>
 						<input type="text" id="effdea" name="effdea" value="0"/>
 						<br/>
-				</form>
 			</div>
 				
+				
+				
+				
+				
 			<div id="cours">
-				<form method="POST">
 					<div id="annee1">
-						<h1 id="anne1">Première année</h1>
+						<p id="anne1">Première année</p>
 					
-							<label id="CDA1">Cours disciplinaire</label>
-<!--- TODO avec BDD-->					
-							<select id="cda1suivi">
-								<option value="1" selected>1</option> 
-								<option value="2" >2</option>
-								<option value="3">3</option>
+							<label id="CDA1">Cours disciplinaire</label>			
+							<select id="cda1suivi" name="cda1suivi">';
+							$resultat=$informations["lesModules"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								if($resultat[$x]->COURS_CD_OU_MS && $resultat[$x]->VISIBILITE_MODULE)
+									echo '<option value="'.$resultat[$x]->NUM_MODULE.'">'.$resultat[$x]->CODE_MODULE.' . '.$resultat[$x]->DESCRIPTIF_MODULE.'</option>';
+							}
+							echo'
 							</select>
 							
-							<label for="cda1valide" id="cda1val">Validé</label>
-							<input type="checkbox" id="cda1valide"/>
+							<label for="cda1valide" id="cda1val">Validé
+							<input type="checkbox" id="cda1valide" name="cda1valide" value="cda1valide"/></label>
 							<br/><br/>
 							
 							<label id="MSA1">Module spécifique</label>
-<!--- TODO avec BDD-->					
-							<select id="msa1suivi">
-								<option value="1" selected>1</option> 
-								<option value="2" >2</option>
-								<option value="3">3</option>
+							<select id="msa1suivi" name="msa1suivi">';
+							$resultat=$informations["lesModules"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								if(!$resultat[$x]->COURS_CD_OU_MS && $resultat[$x]->VISIBILITE_MODULE)
+									echo '<option value="'.$resultat[$x]->NUM_MODULE.'">'.$resultat[$x]->CODE_MODULE.' . '.$resultat[$x]->DESCRIPTIF_MODULE.'</option>';
+							}
+							echo'
 							</select>
 							
-							<label for="msa1valide" id="msa1val" >Validé</label>
-							<input type="checkbox" id="msa1valide"/>
+							<label for="msa1valide" id="msa1val" >Validé
+							<input type="checkbox" id="msa1valide" name="msa1valide" value="msa1valide"/></label>
 							<br/><br/>
 							
 							<label id="CSA1">Cours supplémentaire</label>
-<!--- TODO avec BDD-->					
-							<select id="csa1suivi">
-								<option value="1" selected>1</option> 
-								<option value="2" >2</option>
-								<option value="3">3</option>
+							<select id="csa1suivi" name="csa1suivi">';
+							$resultat=$informations["lesModules"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								if($resultat[$x]->COURS_CD_OU_MS && $resultat[$x]->VISIBILITE_MODULE)
+									echo '<option value="'.$resultat[$x]->NUM_MODULE.'">'.$resultat[$x]->CODE_MODULE.' . '.$resultat[$x]->DESCRIPTIF_MODULE.'</option>';
+							}
+							echo'
 							</select>
 							
-							<label for="csa1valide" id="csa1val">Validé</label>
-							<input type="checkbox" id="csa1valide"/>
+							<label for="csa1valide" id="csa1val">Validé
+							<input type="checkbox" id="csa1valide" name="csa1valide" value="csa1valide"/></label>
 							<br/><br/>
 							
-							<label for="commentairea1" id="comA1">Commentaire</label>
 							<TEXTAREA id="commentairea1" name="commentaireA1" rows=4 cols=40 placeholder="Commentaires"></TEXTAREA>
 					</div>
 					
 					<div id="annee2">
-						<h1 id="anne2">Deuxième année</h1>
+						<p id="anne2">Deuxième année</p>
 					
 							<label id="CDA2">Cours disciplinaire</label>
-<!--- TODO avec BDD-->					
-							<select id="cda2suivi">
-								<option value="1" selected>1</option> 
-								<option value="2" >2</option>
-								<option value="3">3</option>
+							<select id="cda2suivi" name="cda2suivi">';
+							$resultat=$informations["lesModules"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								if($resultat[$x]->COURS_CD_OU_MS && $resultat[$x]->VISIBILITE_MODULE)
+									echo '<option value="'.$resultat[$x]->NUM_MODULE.'">'.$resultat[$x]->CODE_MODULE.' . '.$resultat[$x]->DESCRIPTIF_MODULE.'</option>';
+							}
+							echo'
 							</select>
 							
-							<label for="cda2valide" id="cda2val">Validé</label>
-							<input type="checkbox" id="cda2valide"/>
+							<label for="cda2valide" id="cda2val">Validé
+							<input type="checkbox" id="cda2valide" name="cda2valide" value="cda2valide"/></label>
 							<br/><br/>
 							
-							<label id="MSA2">Module spécifique</label>
-<!--- TODO avec BDD-->					
-							<select id="msa2suivi">
-								<option value="1" selected>1</option> 
-								<option value="2" >2</option>
-								<option value="3">3</option>
+							<label id="MSA2">Module spécifique</label>		
+							<select id="msa2suivi" name="msa2suivi">';
+							$resultat=$informations["lesModules"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								if(!$resultat[$x]->COURS_CD_OU_MS && $resultat[$x]->VISIBILITE_MODULE)
+									echo '<option value="'.$resultat[$x]->NUM_MODULE.'">'.$resultat[$x]->CODE_MODULE.' . '.$resultat[$x]->DESCRIPTIF_MODULE.'</option>';
+							}
+							echo'
 							</select>
 							
-							<label for="msa2valide" id="msa2val" >Validé</label>
-							<input type="checkbox" id="msa2valide"/>
+							<label for="msa2valide" id="msa2val" >Validé
+							<input type="checkbox" id="msa2valide" name="msa2valide" value="msa2valide"/></label>
 							<br/><br/>
 							
-							<label id="CSA2">Cours supplémentaire</label>
-<!--- TODO avec BDD-->					
-							<select id="csa2suivi">
-								<option value="1" selected>1</option> 
-								<option value="2" >2</option>
-								<option value="3">3</option>
+							<label id="CSA2">Cours supplémentaire</label>			
+							<select id="csa2suivi" name="csa2suivi">';
+							$resultat=$informations["lesModules"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								if($resultat[$x]->COURS_CD_OU_MS && $resultat[$x]->VISIBILITE_MODULE)
+									echo '<option value="'.$resultat[$x]->NUM_MODULE.'">'.$resultat[$x]->CODE_MODULE.' . '.$resultat[$x]->DESCRIPTIF_MODULE.'</option>';
+							}
+							echo'
 							</select>
 							
-							<label for="csa2valide" id="csa2val">Validé</label>
-							<input type="checkbox" id="csa2valide"/>
+							<label for="csa2valide" id="csa2val">Validé
+							<input type="checkbox" id="csa2valide" name="csa2valide" value="csa2valide"/></label>
 							<br/><br/>
 							
-							<label for="commentairea2" id="comA2">Commentaire</label>
 							<TEXTAREA id="commentairea2" name="commentaireA2" rows=4 cols=40 placeholder="Commentaires"></TEXTAREA>
 					</div>
 					
 					<div id="annee3">
-						<h1 id="anne3">Troisième année</h1>
+						<p id="anne3">Troisième année</p>
 												
-							<label id="MSA3">Module spécifique</label>
-<!--- TODO avec BDD-->					
-							<select id="msa3suivi">
-								<option value="1" selected>1</option> 
-								<option value="2" >2</option>
-								<option value="3">3</option>
+							<label id="MSA3">Module spécifique</label>			
+							<select id="msa3suivi"  name="msa3suivi">';
+							$resultat=$informations["lesModules"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								if(!$resultat[$x]->COURS_CD_OU_MS && $resultat[$x]->VISIBILITE_MODULE)
+									echo '<option value="'.$resultat[$x]->NUM_MODULE.'">'.$resultat[$x]->CODE_MODULE.' . '.$resultat[$x]->DESCRIPTIF_MODULE.'</option>';
+							}
+							echo'
 							</select>
 							
-							<label for="msa3valide" id="msa3val" >Validé</label>
-							<input type="checkbox" id="msa3valide"/>
+							<label for="msa3valide" id="msa3val" >Validé
+							<input type="checkbox" id="msa3valide" name="msa3valide" value="msa3valide"/></label>
 							<br/><br/>
 							
 							<label id="CSA3">Cours supplémentaire</label>
-<!--- TODO avec BDD-->					
-							<select id="csa3suivi">
-								<option value="1" selected>1</option> 
-								<option value="2" >2</option>
-								<option value="3">3</option>
+							<select id="csa3suivi" name="csa3suivi">';
+							$resultat=$informations["lesModules"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								if($resultat[$x]->COURS_CD_OU_MS && $resultat[$x]->VISIBILITE_MODULE)
+									echo '<option value="'.$resultat[$x]->NUM_MODULE.'">'.$resultat[$x]->CODE_MODULE.' . '.$resultat[$x]->DESCRIPTIF_MODULE.'</option>';
+							}
+							echo'
 							</select>
 							
-							<label for="csa3valide" id="csa3val">Validé</label>
-							<input type="checkbox" id="csa3valide"/>
+							<label for="csa3valide" id="csa3val">Validé
+							<input type="checkbox" id="csa3valide" name="csa3valide" value="csa3valide"/></label>
 							<br/><br/>
 							
-							<label for="commentairea3" id="comA3">Commentaire</label>
 							<TEXTAREA id="commentairea3" name="commentaireA3" rows=4 cols=40 placeholder="Commentaires"></TEXTAREA>
 					</div>
-
-				</form>
 			</div>
+			
+			
+			
+			
 			
 			<div id="soutenance">
-				<form method="POST">
-				
-				</form>
+					<label id="edstnonvalide">Enseignements EDST non validés</label>
+					<br/>
+					<br/>
+					
+					<label for="inscsout" id="inscriptionsout">Inscription soutenance <input type="checkbox" id="inscsout" name="inscsout" value="inscritsoutenance"/></label>
+					<br/>
+					<label for="desrapp" id="desRapports">Désignation des Rapporteurs<input type="checkbox" id="desrapp" name="desrapp" value="designationRapp"/></label>
+					<br/>
+					
+					<label for="compJury" id="copoJury">Composition du Jury communiquée<input type="checkbox" id="compJury" name="compJury" value="compositionJury"/></label>
+					<br/>
+					
+					<label for="2rapp" id="2rapports">2 rapports reçus<input type="checkbox" id="2rapp" name="2rapp" value="rapportsRecu"/></label>
+					<br/>
+					
+					<label for="dateValidationRapp" id="dateValidRapp">Date de validation des rapports par le bureaus de l\'ED</label>
+					<input type="date" id="dateValidationRapp" name="dateValidRapp" value=""  size="20" maxlength="20" />
+					<br/>
+					
+					<label for="dateCompoJury" id="dateCompositionJury">Composition du jury fixée par le bureau le</label>
+					<input type="date" id="dateCompoJury" name="dateCompositionJury" value=""  size="20" maxlength="20" />
+					<br/>
+					
+					<label for="intituledoc" id="doctorat">Intitulé du doctorat</label>
+					<input type="text" id="intituledoc" name="intituledoctorat" value=""  size="20" maxlength="20" />
+					<br/>
+					
+					<label for="numdoc" id="nomdoctorat">Numéro du doctorat</label>
+					<input type="text" id="numdoc" name="numerodoc" value=""  size="20" maxlength="20" />
+					<br/>
+					
+					<label for="metion" id="mention">Mention</label>			
+					<select id="metion" name="mention">';
+							$resultat=$informations["lesMentions"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+									echo '<option value="'.$resultat[$x]->NUM_MENTION.'">'.$resultat[$x]->NOM_MENTION.'</option>';
+							}
+							echo'
+					</select>
 			</div>
+			
+			
+			
+			
 			
 			<div id="postthese">
-				<form method="POST">
-				
-				</form>			
+					<label for="ater" id="aterAvSout">Le docteur a été ATER avant la soutantenance<input type="checkbox" id="ater" name="ater" value="inscritsoutenance"/></label>
+					<br/>
+					
+					<div id="PT1">
+						<label for="formcomp" id="formationComp">Le docteur a suivi une formation complémentaire</label>
+						<select id="formcomp" name="formcomp">
+							<option value="0" selected>aucune</option> 
+							<option value="1" >pendant le doctorat</option>
+							<option value="2">en dehors du doctorat</option>
+						</select>
+						<br/>
+						
+						<label for="titreForm" id="formation">Laquelle</label>
+						<input type="text" id="titreForm" name="nomForm" value="" size="20" maxlength="70"/>
+						<br/>
+						
+						<label for="dureeForm" id="dureeformation">Durée (en heure)</label>
+						<input type="text" id="dureeForm" name="heureForm" value="" size="20" maxlength="20"/>
+					</div>
+					
+					<div id="PT2">
+<!--TODO apparition/disparition-->
+						<label for="pd" id="postdoc">Le docteur a effectué un Post-Doc<input type="checkbox" id="pd" name="pd" value="postdoc"/></label>
+						<br/>
+						<br/>
+						
+						<label for="dureepd" id="dureepostdoc">Durée effective ou prévue du Post-Doc (en mois)</label>
+						<input type="text" id="dureepd" name="dureepostdoc" value="" size="20" maxlength="20"/>
+						<br/>
+						
+						<label for="payspd" id="payspostdoc">Pays du Post-Doc</label>
+						<select id="payspd" name="payspd">';
+							$resultat=$informations["lesPays"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->CODE_PAYS.'">'.$resultat[$x]->NOM_PAYS.'</option>';
+							}
+							echo '
+						</select>
+						<br/>
+					</div>
+					
+					<div id="PT3">
+						<label for="qualifcnu" id="qualificationcnu">Qualification CNU</label>
+						<select id="qualifcnu" name="qualifcnu">
+							<option value="0" selected>non</option> 
+							<option value="1" >oui avec succès</option>
+							<option value="2">oui avec échec</option>
+							<option value="3">non par impossibilité</option>
+							<option value="4">non pas candidat</option>
+						</select>
+						<br/>
+
+<!--TODO apparition/disparition-->						
+						<label for="ouisucces" id="succesqualif">Si oui avec succès, Sections de qualification</label>
+						<input type="text" id="ouisucces" name="succes" value="" size="20" maxlength="50"/>
+					</div>	
 			</div>
 			
-			<div id="these+2">
-				<form method="POST">
-				
-				</form>			
+			
+			
+			
+			<div id="Ttrois">
+					<h1 id="titreT3">Situation au 1er Mars</h1>
+					<br/>
+					
+					<label for="jobdoc3" id="jobdocteur3">Profession du Docteur</label>
+						<select id="jobdoc3" name="jobdoc3">';
+							$resultat=$informations["lesFonctions"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+									echo '<option value="'.$resultat[$x]->NUM_FONCTION.'">'.$resultat[$x]->ACTIVITE_FONCTION.'</option>';
+							}
+							echo'
+						</select>
+					<br/>
+					
+					<label for="situationdoc3" id="situationdocteur3">Situation du Docteur</label>
+					<input type="text" id="situationdoc3" name="situationdoc3" value="" size="20" maxlength="80" />
+					<br/>
+					
+					<label for="codeprof3" id="codeprofession3">Code profession</label>
+						<select id="codeprof3" name="codeprof3">';
+							$resultat=$informations["lesProfDoc"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+									echo '<option value="'.$resultat[$x]->CODE_PROFESSION_INSEE.'">'.$resultat[$x]->PROFESSION_INSEE.'</option>';
+							}
+							echo'
+						</select>
+					<br/>
+					
+					<label for="scteuract3" id="secteuractivite3">Secteur Activité</label>
+						<select id="scteuract3" name="secteuract3">';
+							$resultat=$informations["lesSecteurs"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+									echo '<option value="'.$resultat[$x]->NUM_SECTEUR_ACTIVITE.'">'.$resultat[$x]->CODE_ACTIVITE.' '.$resultat[$x]->LIBELLE_ACTIVITE.'</option>';
+							}
+							echo'
+						</select>
+					<br/>
+					
+					<label for="jobfr3" id="jobfrance3">Travail en France<input type="checkbox" name="jobfr3" tabindex="160" disabled="" id="jobfr3" value="france"/></label>
+					<br/>
+					<br/>
+					
+<!--TODO faire apparaitre/disparaitre si checkbox coche-->					
+					<label for="dep3" id="departement3">Departement du lieu de travail si France</label>
+					<input type="text" id="dep3" tabindex="80" onblur="activer_checkbox()" name="dep3" value="" size="20" maxlength="50" />
+					<br/>
+					
+					<label for="docdeter3" id="doctorantdeter3">Doctorat déterminant pour l\'embauche<input type="checkbox" id="docdeter3" name="docdeter3" value="france"/></label>
+					<br/>
+					<br/>
+					
+					<label for="paystravail3" id="paysjob3">Pays du lieu de travail si Etranger</label>
+						<select id="paystravail3" name="paystravail3">';
+							$resultat=$informations["lesPays"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->CODE_PAYS.'">'.$resultat[$x]->NOM_PAYS.'</option>';
+							}
+							echo '
+						</select>
+					<br/>
+					
+					<label for="salaire3" id="salairenet3">Salaire net mensuel</label>
+					<input type="text" id="salaire3" name="salairenet3" value="" size="20" maxlength="50"/>
+					<label id="euro3">€</label>
+					<br/>
+					
+					<label for="recrut3" id="recrutement3">Date de recrutement dans cet emploi</label>
+					<input type="date" id="recrut3" name="recrutement3" value="" size="20" maxlength="50"/>
+					<br/>
 			</div>
 			
-			<div id="these+3">
-				<form method="POST">
-				
-				</form>			
-			</div>
-		</div>';
+			
+			
+			
+			
+			
+			<div id="Tdeux">
+					<h1 id="titreT2">Situation au 1er Mars</h1>
+					<br/>
+					
+					<label for="jobdoc" id="jobdocteur">Profession du Docteur</label>
+						<select id="jobdoc" name="jobdoc">';
+							$resultat=$informations["lesFonctions"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+									echo '<option value="'.$resultat[$x]->NUM_FONCTION.'">'.$resultat[$x]->ACTIVITE_FONCTION.'</option>';
+							}
+							echo'
+						</select>
+					<br/>
+					
+					<label for="situationdoc" id="situationdocteur">Situation du Docteur</label>
+					<input type="text" id="situationdoc" name="situationdoc" value="" size="20" maxlength="80" />
+					<br/>
+					
+					<label for="codeprof" id="codeprofession">Code profession</label>
+						<select id="codeprof" name="codeprof">';
+							$resultat=$informations["lesProfDoc"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+									echo '<option value="'.$resultat[$x]->CODE_PROFESSION_INSEE.'">'.$resultat[$x]->PROFESSION_INSEE.'</option>';
+							}
+							echo'
+						</select>
+					<br/>
+					
+					<label for="scteuract" id="secteuractivite">Secteur Activité</label>
+						<select id="scteuract" name="secteuract">';
+							$resultat=$informations["lesSecteurs"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+									echo '<option value="'.$resultat[$x]->NUM_SECTEUR_ACTIVITE.'">'.$resultat[$x]->CODE_ACTIVITE.' '.$resultat[$x]->LIBELLE_ACTIVITE.'</option>';
+							}
+							echo'
+						</select>
+					<br/>
+					
+					<label for="jobfr" id="jobfrance">Travail en France<input type="checkbox" id="jobfr" name="jobfr" value="france"/></label>
+					<br/>
+					<br/>
+					
+<!--TODO faire apparaitre/disparaitre si checkbox coche-->					
+					<label for="dep" id="departement">Departement du lieu de travail si France</label>
+					<input type="text" id="dep" name="dep" value="" size="20" maxlength="50" />
+					<br/>
+					
+					<label for="docdeter" id="doctorantdeter">Doctorat déterminant pour l\'embauche<input type="checkbox" name="docdeter" id="docdeter" value="france"/></label>
+					<br/>	
+					<br/>
+					
+					<label for="paystravail" id="paysjob">Pays du lieu de travail si Etranger</label>
+						<select id="paystravail" name="paystravail">';
+							$resultat=$informations["lesPays"];
+							$len = count($resultat);
+							for($x = 0; $x < $len; $x++) {
+								echo '<option value="'.$resultat[$x]->CODE_PAYS.'">'.$resultat[$x]->NOM_PAYS.'</option>';
+							}
+							echo '
+						</select>
+					<br/>
+					
+					<label for="salaire" id="salairenet">Salaire net mensuel</label>
+					<input type="text" id="salaire" name="salairenet" value="" size="20" maxlength="50"/>
+					<label id="euro">€</label>
+					<br/>
+					
+					<label for="recrut" id="recrutement">Date de recrutement dans cet emploi</label>
+					<input type="date" id="recrut" name="recrutement" value="" size="20" maxlength="50"/>
+					<br/>
+						
+				</div>
+			</form>	
+		</div>
+		';
 	}
 
 
